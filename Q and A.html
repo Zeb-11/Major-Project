@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Step - Career Assessment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #1e40af;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #2563eb;
+            background: #f1f5f9;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Intro Section */
+        .intro-section {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+        }
+
+        .intro-title {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .intro-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            display: none;
+        }
+
+        .progress-container {
+            background: #f1f5f9;
+            border-radius: 10px;
+            height: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            height: 100%;
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-number {
+            font-size: 1.1rem;
+            color: #2563eb;
+            font-weight: 600;
+            background: #eff6ff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            background: #eff6ff;
+            border-color: #2563eb;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #2563eb;
+            color: white;
+            border-color: #1e40af;
+        }
+
+        .option-number {
+            background: #e2e8f0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-number {
+            background: #1e40af;
+            color: white;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .nav-btn {
+            background: #6b7280;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #4b5563;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.next {
+            background: #2563eb;
+        }
+
+        .nav-btn.next:hover:not(:disabled) {
+            background: #1e40af;
+        }
+
+        /* Results Section */
+        .results-section {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            display: none;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .results-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .analysis-container {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+
+        .analysis-title {
+            font-size: 1.5rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .analysis-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #4b5563;
+        }
+
+        .companies-section {
+            margin-top: 3rem;
+        }
+
+        .companies-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .companies-title {
+            font-size: 2rem;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .companies-subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .show-more-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .company-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            border-color: #2563eb;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .company-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-industry {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .company-description {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .company-match {
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .company-traits {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #1e40af;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #dbeafe;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #dbeafe;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .intro-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.3rem;
+            }
+            
+            .results-title {
+                font-size: 2rem;
+            }
+            
+            .score-value {
+                font-size: 2.8rem;
+            }
+            
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 0 1rem;
+            }
+            
+            .intro-section,
+            .quiz-section,
+            .results-section {
+                padding: 1.5rem;
+            }
+            
+            .intro-title {
+                font-size: 1.8rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 1rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">Next<span>Step</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="#" class="active">Assessment</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Intro Section -->
+        <section class="intro-section" id="intro">
+            <h1 class="intro-title">Career Assessment Quiz</h1>
+            <p class="intro-subtitle">Discover Your Perfect Career Path</p>
+            <p class="intro-text">
+                Take our comprehensive 15-question assessment to uncover your strengths, 
+                preferences, and ideal work environment. Get personalized company recommendations 
+                that match your unique career profile.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Personalized Analysis</h3>
+                    <p>Detailed insights into your career preferences</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💼</div>
+                    <h3 class="feature-title">30+ Company Matches</h3>
+                    <p>Top companies that fit your profile</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Quick Assessment</h3>
+                    <p>Only 15 questions - takes 5 minutes</p>
+                </div>
+            </div>
+            
+            <button class="start-btn" onclick="startQuiz()">
+                <i class="fas fa-play-circle"></i> Start Assessment
+            </button>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="question-header">
+                <div class="question-number" id="question-number">Question 1 of 15</div>
+            </div>
+            
+            <h2 class="question-text" id="question-text"></h2>
+            
+            <div class="options-container" id="options-container"></div>
+            
+            <div class="navigation">
+                <button class="nav-btn prev" onclick="prevQuestion()" id="prev-btn" disabled>
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="nav-btn next" onclick="nextQuestion()" id="next-btn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="results">
+            <div class="results-header">
+                <h1 class="results-title">Your Career Assessment Results</h1>
+                <p class="results-subtitle">Based on your answers, here's your personalized analysis</p>
+            </div>
+            
+            <div class="score-display">
+                <div class="score-value" id="score-value">0%</div>
+                <div class="score-label">Overall Match Score</div>
+            </div>
+            
+            <div class="analysis-container">
+                <h3 class="analysis-title">
+                    <i class="fas fa-chart-line"></i> Career Personality Analysis
+                </h3>
+                <p class="analysis-text" id="career-analysis"></p>
+            </div>
+            
+            <div class="analysis-container">
+                <h3 class="analysis-title">
+                    <i class="fas fa-star"></i> Strengths & Recommendations
+                </h3>
+                <p class="analysis-text" id="strengths-analysis"></p>
+            </div>
+            
+            <div class="companies-section">
+                <div class="companies-header">
+                    <h2 class="companies-title">Recommended Companies</h2>
+                    <p class="companies-subtitle">30+ companies that match your career profile</p>
+                    <button class="show-more-btn" onclick="toggleCompanies()" id="toggle-btn">
+                        Show All Companies
+                    </button>
+                </div>
+                
+                <div class="companies-grid" id="companies-grid"></div>
+            </div>
+            
+            <button class="restart-btn" onclick="restartQuiz()">
+                <i class="fas fa-redo"></i> Take Assessment Again
+            </button>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Next Step</h3>
+                    <p>Helping professionals find their perfect career path through personalized assessments and company matching.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Job Search</a></li>
+                        <li><a href="#">Career Resources</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Next Step Career Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz questions and scoring system
+        const questions = [
+            {
+                question: "What type of work environment motivates you the most?",
+                options: [
+                    "Fast-paced startup with rapid growth",
+                    "Structured corporate setting with clear hierarchy",
+                    "Creative agency with flexible approach",
+                    "Collaborative team-based environment",
+                    "Remote work with complete autonomy"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "How do you prefer to solve complex problems?",
+                options: [
+                    "Quick decision-making and action",
+                    "Systematic analysis and planning",
+                    "Creative brainstorming and innovation",
+                    "Team collaboration and discussion",
+                    "Independent research and experimentation"
+                ],
+                scores: [4, 3, 5, 2, 1]
+            },
+            {
+                question: "What's your ideal work schedule?",
+                options: [
+                    "Intense bursts with flexible hours",
+                    "Structured 9-5 with clear boundaries",
+                    "Varies based on creative inspiration",
+                    "Coordinated with team availability",
+                    "Completely self-determined"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "How do you approach learning new skills?",
+                options: [
+                    "Learn quickly through hands-on experience",
+                    "Formal training and structured courses",
+                    "Self-directed exploration and experimentation",
+                    "Group learning and mentorship",
+                    "Deep dive into specialized topics"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "What type of projects excite you the most?",
+                options: [
+                    "High-impact, short-term projects",
+                    "Well-defined, long-term initiatives",
+                    "Innovative and experimental work",
+                    "Team-based collaborative efforts",
+                    "Specialized technical challenges"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "How do you prefer to receive feedback?",
+                options: [
+                    "Immediate and direct feedback",
+                    "Structured performance reviews",
+                    "Creative critique sessions",
+                    "Regular team discussions",
+                    "Self-assessment and reflection"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "What leadership style resonates with you?",
+                options: [
+                    "Direct and results-oriented",
+                    "Structured and process-focused",
+                    "Visionary and inspirational",
+                    "Collaborative and supportive",
+                    "Autonomous and trust-based"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "How do you handle work-related stress?",
+                options: [
+                    "Thrive under pressure and tight deadlines",
+                    "Follow established procedures and plans",
+                    "Get creative with solutions",
+                    "Seek support from colleagues",
+                    "Maintain work-life balance boundaries"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "What communication style do you prefer?",
+                options: [
+                    "Direct and concise messaging",
+                    "Formal and documented communication",
+                    "Visual and creative presentations",
+                    "Interactive team discussions",
+                    "Written and detailed documentation"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "How important is company culture to you?",
+                options: [
+                    "Dynamic and fast-changing environment",
+                    "Stable and traditional values",
+                    "Innovative and forward-thinking",
+                    "Collaborative and team-oriented",
+                    "Autonomous and individual-focused"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "What motivates your career decisions?",
+                options: [
+                    "Rapid advancement and growth opportunities",
+                    "Job security and stability",
+                    "Creative freedom and innovation",
+                    "Team success and collaboration",
+                    "Work-life balance and flexibility"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "How do you approach risk in your career?",
+                options: [
+                    "Embrace high-risk, high-reward opportunities",
+                    "Prefer calculated and minimal risk",
+                    "See risk as creative opportunity",
+                    "Evaluate risk with team input",
+                    "Avoid unnecessary risks carefully"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "What type of team structure do you prefer?",
+                options: [
+                    "Small, agile teams with rapid iteration",
+                    "Large, structured teams with clear roles",
+                    "Cross-functional creative teams",
+                    "Collaborative project teams",
+                    "Independent contributor role"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "How do you measure professional success?",
+                options: [
+                    "Tangible results and impact",
+                    "Career progression and promotions",
+                    "Creative achievements and innovation",
+                    "Team accomplishments and relationships",
+                    "Personal growth and satisfaction"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            },
+            {
+                question: "What's your approach to work-life integration?",
+                options: [
+                    "Work is life - passionate immersion",
+                    "Clear separation between work and personal life",
+                    "Flexible integration based on inspiration",
+                    "Balanced approach with team considerations",
+                    "Strong boundaries for personal time"
+                ],
+                scores: [4, 2, 5, 3, 1]
+            }
+        ];
+
+        // 30 Company recommendations
+        const companies = [
+            {
+                name: "TechVision Innovations",
+                industry: "Technology & AI",
+                match: "92%",
+                description: "Fast-growing tech startup focused on AI and machine learning solutions",
+                traits: ["Innovative", "Dynamic", "Growth-focused", "Technical"]
+            },
+            {
+                name: "Creative Momentum",
+                industry: "Digital Marketing",
+                match: "88%",
+                description: "Award-winning creative agency serving global brands",
+                traits: ["Creative", "Flexible", "Collaborative", "Client-facing"]
+            },
+            {
+                name: "Strategic Solutions Inc.",
+                industry: "Management Consulting",
+                match: "85%",
+                description: "Top-tier consulting firm specializing in business transformation",
+                traits: ["Analytical", "Structured", "Professional", "High-impact"]
+            },
+            {
+                name: "Nexus Enterprises",
+                industry: "Multinational Corporation",
+                match: "82%",
+                description: "Global leader in consumer products with diverse portfolio",
+                traits: ["Stable", "Structured", "Global", "Corporate"]
+            },
+            {
+                name: "InnovaTech Labs",
+                industry: "Research & Development",
+                match: "90%",
+                description: "Cutting-edge technology research and innovation center",
+                traits: ["Innovative", "Technical", "Research-focused", "Forward-thinking"]
+            },
+            {
+                name: "Peak Performance Co.",
+                industry: "Professional Services",
+                match: "87%",
+                description: "Elite consulting firm for executive leadership development",
+                traits: ["Professional", "High-performance", "Leadership", "Strategic"]
+            },
+            {
+                name: "DataSphere Analytics",
+                industry: "Big Data & Analytics",
+                match: "89%",
+                description: "Leading data analytics firm serving Fortune 500 companies",
+                traits: ["Analytical", "Technical", "Data-driven", "Innovative"]
+            },
+            {
+                name: "GreenTech Solutions",
+                industry: "Renewable Energy",
+                match: "84%",
+                description: "Sustainable technology company focused on clean energy solutions",
+                traits: ["Purpose-driven", "Innovative", "Growth", "Environmental"]
+            },
+            {
+                name: "HealthBridge Medical",
+                industry: "Healthcare Technology",
+                match: "86%",
+                description: "Healthcare technology company improving patient outcomes",
+                traits: ["Mission-driven", "Technical", "Collaborative", "Growing"]
+            },
+            {
+                name: "FinTech Pioneers",
+                industry: "Financial Technology",
+                match: "91%",
+                description: "Innovative financial technology startup disrupting traditional banking",
+                traits: ["Fast-paced", "Technical", "Innovative", "High-growth"]
+            },
+            {
+                name: "EduFuture Learning",
+                industry: "EdTech",
+                match: "83%",
+                description: "Educational technology company transforming online learning",
+                traits: ["Purpose-driven", "Creative", "Growing", "Innovative"]
+            },
+            {
+                name: "CloudScape Technologies",
+                industry: "Cloud Computing",
+                match: "88%",
+                description: "Leading cloud infrastructure provider for enterprise solutions",
+                traits: ["Technical", "Scalable", "Innovative", "Enterprise"]
+            },
+            {
+                name: "BioGen Innovations",
+                industry: "Biotechnology",
+                match: "85%",
+                description: "Cutting-edge biotech company developing life-saving therapies",
+                traits: ["Research-focused", "Innovative", "Purpose-driven", "Technical"]
+            },
+            {
+                name: "MarketSphere Analytics",
+                industry: "Market Research",
+                match: "82%",
+                description: "Global market research firm providing consumer insights",
+                traits: ["Analytical", "Data-driven", "Client-focused", "Strategic"]
+            },
+            {
+                name: "SecureNet Systems",
+                industry: "Cybersecurity",
+                match: "90%",
+                description: "Cybersecurity firm protecting enterprise digital assets",
+                traits: ["Technical", "Critical", "Growing", "High-demand"]
+            },
+            {
+                name: "UrbanPlan Design",
+                industry: "Architecture & Design",
+                match: "84%",
+                description: "Innovative architecture firm creating sustainable urban spaces",
+                traits: ["Creative", "Design-focused", "Sustainable", "Collaborative"]
+            },
+            {
+                name: "LogiChain Solutions",
+                industry: "Supply Chain",
+                match: "83%",
+                description: "Supply chain optimization company for global logistics",
+                traits: ["Analytical", "Global", "Efficient", "Strategic"]
+            },
+            {
+                name: "MediaMomentum Group",
+                industry: "Media & Entertainment",
+                match: "87%",
+                description: "Digital media company creating engaging content experiences",
+                traits: ["Creative", "Fast-paced", "Innovative", "Content-focused"]
+            },
+            {
+                name: "RoboTech Industries",
+                industry: "Robotics & Automation",
+                match: "89%",
+                description: "Robotics company developing automation solutions for industry",
+                traits: ["Technical", "Innovative", "Future-focused", "Engineering"]
+            },
+            {
+                name: "WellnessPath Healthcare",
+                industry: "Healthcare Services",
+                match: "85%",
+                description: "Healthcare provider focused on holistic patient care",
+                traits: ["Compassionate", "Growing", "Service-oriented", "Stable"]
+            },
+            {
+                name: "EcoSolutions Group",
+                industry: "Environmental Services",
+                match: "84%",
+                description: "Environmental consulting firm promoting sustainability",
+                traits: ["Purpose-driven", "Consulting", "Growing", "Environmental"]
+            },
+            {
+                name: "GameSphere Studios",
+                industry: "Gaming & Entertainment",
+                match: "88%",
+                description: "Video game development studio creating immersive experiences",
+                traits: ["Creative", "Technical", "Innovative", "Entertainment"]
+            },
+            {
+                name: "LegalEdge Partners",
+                industry: "Legal Technology",
+                match: "83%",
+                description: "Legal tech company streamlining legal processes",
+                traits: ["Professional", "Technical", "Efficient", "Growing"]
+            },
+            {
+                name: "TravelSphere Experiences",
+                industry: "Travel Technology",
+                match: "86%",
+                description: "Travel tech company creating seamless booking experiences",
+                traits: ["Customer-focused", "Technical", "Global", "Growing"]
+            },
+            {
+                name: "FoodTech Innovations",
+                industry: "Food Technology",
+                match: "85%",
+                description: "Food technology company developing sustainable food solutions",
+                traits: ["Innovative", "Sustainable", "Growing", "Purpose-driven"]
+            },
+            {
+                name: "SportsTech Dynamics",
+                industry: "Sports Technology",
+                match: "87%",
+                description: "Sports technology company enhancing athletic performance",
+                traits: ["Technical", "Innovative", "Performance-focused", "Growing"]
+            },
+            {
+                name: "RealEstate Connect",
+                industry: "Real Estate Tech",
+                match: "84%",
+                description: "Real estate technology platform connecting buyers and sellers",
+                traits: ["Tech-driven", "Customer-focused", "Growing", "Platform"]
+            },
+            {
+                name: "AutoTech Solutions",
+                industry: "Automotive Technology",
+                match: "89%",
+                description: "Automotive technology company developing smart vehicles",
+                traits: ["Technical", "Innovative", "Engineering", "Future-focused"]
+            },
+            {
+                name: "SpaceFrontier Technologies",
+                industry: "Aerospace",
+                match: "86%",
+                description: "Aerospace company pioneering space exploration technologies",
+                traits: ["Innovative", "Technical", "Cutting-edge", "Visionary"]
+            },
+            {
+                name: "QuantumLeap Computing",
+                industry: "Quantum Computing",
+                match: "91%",
+                description: "Quantum computing research company pushing technological boundaries",
+                traits: ["Highly Technical", "Innovative", "Research-focused", "Future-oriented"]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userScores = Array(5).fill(0);
+        let userAnswers = [];
+        let showAllCompanies = false;
+
+        function startQuiz() {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('quiz').style.display = 'block';
+            showQuestion(0);
+        }
+
+        function showQuestion(index) {
+            const question = questions[index];
+            document.getElementById('question-number').textContent = `Question ${index + 1} of ${questions.length}`;
+            document.getElementById('question-text').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-number">${i + 1}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                optionElement.onclick = () => selectOption(i);
+                if (userAnswers[index] === i) {
+                    optionElement.classList.add('selected');
+                }
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update progress bar
+            const progress = ((index + 1) / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = index === 0;
+            document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'See Results' : 'Next Question';
+        }
+
+        function selectOption(optionIndex) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+            
+            userAnswers[currentQuestion] = optionIndex;
+        }
+
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === undefined) {
+                alert('Please select an answer before proceeding.');
+                return;
+            }
+            
+            // Calculate score for current question
+            const question = questions[currentQuestion];
+            const score = question.scores[userAnswers[currentQuestion]];
+            userScores[score - 1]++;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            
+            // Calculate total score and analysis
+            const totalScore = userScores.reduce((sum, score) => sum + score, 0);
+            const maxScore = questions.length * 5;
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            
+            document.getElementById('score-value').textContent = `${percentage}%`;
+            
+            // Generate analysis based on scores
+            generateAnalysis();
+            
+            // Show recommended companies
+            showCompanies();
+        }
+
+        function generateAnalysis() {
+            const traitScores = userScores;
+            const maxScore = Math.max(...traitScores);
+            
+            let analysis = "Based on your assessment, you exhibit strong ";
+            
+            if (traitScores[4] === maxScore) {
+                analysis += "creative and innovative tendencies. You thrive in environments that encourage experimentation and out-of-the-box thinking. ";
+            } else if (traitScores[0] === maxScore) {
+                analysis += "dynamic and results-driven characteristics. You excel in fast-paced environments with clear goals and rapid iteration. ";
+            } else if (traitScores[3] === maxScore) {
+                analysis += "collaborative and team-oriented qualities. You work best in environments that value cooperation and mutual support. ";
+            } else if (traitScores[1] === maxScore) {
+                analysis += "structured and analytical thinking patterns. You prefer well-defined processes and systematic approaches to work. ";
+            } else {
+                analysis += "independent and self-directed work style. You value autonomy and prefer to manage your own time and priorities. ";
+            }
+            
+            analysis += "Your unique combination of strengths makes you well-suited for roles that balance these characteristics with opportunities for growth and development.";
+            
+            document.getElementById('career-analysis').textContent = analysis;
+            
+            // Strengths analysis
+            let strengths = "Your assessment reveals several key strengths: ";
+            const strengthList = [];
+            
+            if (traitScores[4] >= 3) strengthList.push("creative problem-solving");
+            if (traitScores[0] >= 3) strengthList.push("adaptability in dynamic environments");
+            if (traitScores[3] >= 3) strengthList.push("strong collaboration skills");
+            if (traitScores[1] >= 3) strengthList.push("analytical thinking");
+            if (traitScores[2] >= 3) strengthList.push("effective communication");
+            
+            strengths += strengthList.join(", ") + ". We recommend focusing on roles that leverage these strengths while continuing to develop complementary skills through targeted learning and experience.";
+            
+            document.getElementById('strengths-analysis').textContent = strengths;
+        }
+
+        function toggleCompanies() {
+            showAllCompanies = !showAllCompanies;
+            document.getElementById('toggle-btn').textContent = showAllCompanies ? 'Show Less' : 'Show All Companies';
+            showCompanies();
+        }
+
+        function showCompanies() {
+            const companiesGrid = document.getElementById('companies-grid');
+            companiesGrid.innerHTML = '';
+            
+            const companiesToShow = showAllCompanies ? companies : companies.slice(0, 12);
+            
+            companiesToShow.forEach(company => {
+                const card = document.createElement('div');
+                card.className = 'company-card';
+                
+                card.innerHTML = `
+                    <div class="company-logo">${company.name.split(' ').map(w => w[0]).join('')}</div>
+                    <h3 class="company-name">${company.name}</h3>
+                    <p class="company-industry">${company.industry}</p>
+                    <p class="company-description">${company.description}</p>
+                    <div class="company-match">${company.match} Match</div>
+                    <p class="company-traits"><strong>Key traits:</strong> ${company.traits.join(', ')}</p>
+                `;
+                
+                companiesGrid.appendChild(card);
+            });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userScores = Array(5).fill(0);
+            userAnswers = [];
+            showAllCompanies = false;
+            
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('intro').style.display = 'block';
+            document.getElementById('toggle-btn').textContent = 'Show All Companies';
+        }
+    </script>
+</body>
+</html>

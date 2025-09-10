@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Next Step - Your Comprehensive Career Platform</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #374151;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 20px rgba(30, 64, 175, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.5rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1e40af;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-accent {
+            color: #3b82f6;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        
+        nav a:hover {
+            color: #1e40af;
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            position: relative;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* About Sections */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .section h2 {
+            color: #1e40af;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            border-radius: 2px;
+        }
+        
+        .section p {
+            color: #4b5563;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            margin-bottom: 1.8rem;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-item {
+            background: #f8fafc;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+            border-color: #3b82f6;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #1e40af;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .feature-item h3 {
+            color: #1e40af;
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .feature-item p {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+        
+        /* Process Steps */
+        .process-container {
+            position: relative;
+            margin-top: 3rem;
+        }
+        
+        .process-line {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            z-index: 1;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 2.5rem;
+            background: #f8fafc;
+            border-radius: 15px;
+            position: relative;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .step h3 {
+            color: #1e40af;
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .step p {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            margin-top: 3rem;
+        }
+        
+        .benefit-list {
+            list-style: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .benefit-item {
+            padding: 1.5rem 2rem;
+            margin-bottom: 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .benefit-icon {
+            color: #1e40af;
+            font-size: 1.5rem;
+            min-width: 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 4rem 0 1rem;
+            margin-top: 6rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h3 {
+            color: #93c5fd;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .footer-section p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: #e0f2fe;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #93c5fd;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: rgba(147, 197, 253, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.8;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .process-line {
+                display: none;
+            }
+            
+            .section {
+                padding: 2.5rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Next<span class="logo-accent">Step</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Companies</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Transforming Career Journeys</h1>
+            <p>Next Step is more than just a job board – we're your comprehensive career partner, connecting exceptional talent with extraordinary opportunities through innovative technology and personalized support.</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Active Jobs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15,000+</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2M+</div>
+                    <div class="stat-label">Successful Hires</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- How It Works Section -->
+        <section class="section">
+            <h2>How Next Step Revolutionizes Your Job Search</h2>
+            <p>Our platform combines cutting-edge technology with human expertise to create a seamless, efficient, and effective job search experience. Unlike traditional job boards, Next Step offers a personalized, end-to-end solution that guides you every step of the way.</p>
+            
+            <div class="highlight">
+                <p><strong>Why we're different:</strong> We don't just list jobs – we understand career aspirations, match skills with opportunities, and provide the tools you need to succeed in today's competitive job market.</p>
+            </div>
+            
+            <div class="process-container">
+                <div class="process-line"></div>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Comprehensive Profile Creation</h3>
+                        <p>Build a dynamic professional profile that goes beyond traditional resumes. Our intelligent system analyzes your skills, experience, education, and career goals to create a comprehensive digital portfolio. Include multimedia elements, project portfolios, and skill verifications to stand out to employers. The system automatically suggests improvements and optimizations based on industry standards and current market trends.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>AI-Powered Job Matching</h3>
+                        <p>Our advanced artificial intelligence engine scans thousands of job listings daily, matching you with opportunities that align perfectly with your profile. The system considers not just skills and experience, but also company culture fit, growth potential, commute time, remote work preferences, and your personal work style. Machine learning algorithms continuously refine matches based on your interactions and feedback.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Smart Application Management</h3>
+                        <p>Streamline your job applications with our one-click apply system, automated resume tailoring, and personalized cover letter generation. Track every application in real-time, receive instant status updates, and get notified when employers view your profile or schedule interviews. Our system provides analytics on application success rates and suggests improvements to increase your chances of landing interviews.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Career Advancement Support</h3>
+                        <p>Beyond job matching, we provide comprehensive career coaching, interview preparation resources, salary negotiation guidance, and continuous learning opportunities. Our certified career advisors are available to help you navigate your professional journey, make informed decisions about your future, and develop long-term career strategies. Access webinars, workshops, and networking events to expand your professional connections.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <h2>Comprehensive Features for Job Seekers & Employers</h2>
+            <p>Next Step offers a robust suite of features designed to meet the needs of both job seekers and employers, creating a symbiotic ecosystem that benefits everyone in the hiring process. Our platform is built on three core principles: intelligence, efficiency, and transparency.</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Advanced AI Matching Algorithm</h3>
+                    <p>Our proprietary algorithm uses machine learning and natural language processing to analyze millions of data points, ensuring perfect matches between candidates and opportunities. The system continuously learns from user behavior, market trends, and hiring patterns to improve recommendations over time. It considers factors like skill compatibility, cultural fit, growth potential, and location preferences to deliver highly relevant matches.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3>Real-time Analytics Dashboard</h3>
+                    <p>Track application performance, profile views, and market trends with our comprehensive analytics dashboard. Get insights into what employers are looking for, which skills are in high demand, and how your profile compares to other candidates. Monitor your job search metrics, including application-to-interview ratios, response times, and success rates across different industries and companies.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">💬</div>
+                    <h3>Direct Messaging Platform</h3>
+                    <p>Communicate directly with employers and recruiters through our secure, encrypted messaging platform. No more waiting for email responses – get instant answers to your questions, schedule interviews directly, and receive timely updates. The system includes read receipts, typing indicators, and file sharing capabilities to facilitate smooth communication throughout the hiring process.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Comprehensive Skill Assessment</h3>
+                    <p>Validate your skills with our comprehensive assessment system featuring technical challenges, behavioral tests, and situational judgment scenarios. Complete skill-based challenges, take certified tests, and earn verifiable badges that demonstrate your capabilities to potential employers. Assessments are designed by industry experts and updated regularly to reflect current market requirements.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile-First Optimization</h3>
+                    <p>Access all platform features seamlessly on any device with our responsive, mobile-first design. Our native mobile app offers push notifications for important updates, offline access to your profile, and mobile-optimized application processes. The interface is designed for touch interactions and provides the same robust functionality as the desktop version.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Enhanced Privacy Controls</h3>
+                    <p>Control your visibility and data with granular privacy settings that put you in charge of your information. Choose who sees your profile, what information they can access, and how your data is used. Our enterprise-grade security measures include end-to-end encryption, regular security audits, and compliance with global data protection regulations like GDPR and CCPA.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📝</div>
+                    <h3>Intelligent Resume Builder</h3>
+                    <p>Create professional, ATS-friendly resumes with our intelligent builder that offers real-time feedback and optimization suggestions. Choose from dozens of industry-specific templates, get AI-powered content recommendations, and export in multiple formats. The system analyzes job descriptions and suggests relevant keywords to improve your resume's chances of passing automated screening systems.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Global Opportunity Access</h3>
+                    <p>Access opportunities from around the world with our multi-language, multi-currency platform that supports local job market requirements. Our global network includes companies from North America, Europe, Asia-Pacific, and emerging markets. The platform handles currency conversions, time zone differences, and local employment regulations to simplify international job searches.</p>
+                </div>
+            </div>
+            
+            <div class="benefits">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: #1e40af;">Key Benefits for Job Seekers</h3>
+                <ul class="benefit-list">
+                    <li class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span><strong>Time Efficiency:</strong> Save countless hours with personalized job recommendations, automated applications, and intelligent filtering that surfaces only the most relevant opportunities.</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span><strong>Increased Visibility:</strong> Boost your interview chances with optimized profiles, tailored applications, and proactive employer matching that puts your profile in front of the right decision-makers.</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span><strong>Exclusive Access:</strong> Get early access to unadvertised positions, private company listings, and exclusive opportunities not available on other job platforms or public job boards.</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span><strong>Career Development:</strong> Access continuous learning resources, skill development programs, and career advancement tools that help you grow professionally and stay competitive in the job market.</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span><strong>Community Support:</strong> Join a network of professionals, mentors, and career coaches who provide guidance, support, and networking opportunities throughout your career journey.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Additional Services Section -->
+        <section class="section">
+            <h2>Additional Services & Support</h2>
+            <p>Beyond our core platform features, Next Step offers a range of additional services designed to support your entire career lifecycle and ensure long-term success in your professional journey.</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Career Coaching</h3>
+                    <p>Work with certified career coaches who provide personalized guidance on career planning, job search strategies, interview preparation, and professional development. Our coaches help you identify your strengths, set achievable goals, and develop actionable plans to advance your career. Sessions include resume reviews, mock interviews, and personalized feedback.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <h3>Salary Negotiation</h3>
+                    <p>Access comprehensive salary data and negotiation tools to ensure you receive competitive compensation packages. Our platform provides real-time market data, personalized salary recommendations, and negotiation scripts tailored to your specific situation. Get guidance on benefits negotiation, equity compensation, and total rewards packages.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📚</div>
+                    <h3>Learning Resources</h3>
+                    <p>Access a vast library of learning materials, including courses, webinars, articles, and tutorials covering various professional development topics. Content is curated by industry experts and updated regularly to reflect current market trends. Topics range from technical skills development to soft skills enhancement and industry-specific knowledge.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Networking Events</h3>
+                    <p>Participate in virtual and in-person networking events, career fairs, and industry conferences organized through our platform. Connect with employers, recruiters, and fellow professionals to expand your network and discover new opportunities. Events include company meetups, industry panels, and professional mixers.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Next Step</h3>
+                    <p>Your trusted partner in career advancement and professional growth. We're committed to helping you find meaningful work and build successful careers through innovative technology and personalized support.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Browse All Jobs</a></li>
+                        <li><a href="#">Post a Job Opening</a></li>
+                        <li><a href="#">Career Resources Center</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Company Directory</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Resume Builder</a></li>
+                        <li><a href="#">Interview Preparation</a></li>
+                        <li><a href="#">Salary Calculator</a></li>
+                        <li><a href="#">Career Blog</a></li>
+                        <li><a href="#">Webinars & Events</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <p>Stay updated with the latest job opportunities and career insights:</p>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">TW</a>
+                        <a href="#">LI</a>
+                        <a href="#">IG</a>
+                        <a href="#">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p>Email: info@nextstepcareers.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Address: 123 Career Avenue, Suite 100<br>San Francisco, CA 94102</p>
+                    <p>Hours: Monday-Friday, 9AM-6PM PST</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 Next Step Career Platform. All rights reserved. | Privacy Policy | Terms of Service | Cookie Policy</p>
+                <p>Next Step is an equal opportunity platform. We celebrate diversity and are committed to creating an inclusive environment for all professionals.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+

@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tree structure styling with connecting lines */
+        .tree-line {
+            position: relative;
+        }
+        .tree-line::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        }
+        .tree-node {
+            position: relative;
+            margin-left: 40px;
+        }
+        .tree-node::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 20px;
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        }
+        .root-node {
+            margin-left: 8rem;
+            margin-right: 8rem;
+        }
+        .root-node::before {
+            display: none;
+        }
+        
+        /* Smooth animations for expand/collapse */
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+        .expanded .expand-icon {
+            transform: rotate(90deg);
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px); 
+                max-height: 0;
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 3000px; /* Sufficiently large to allow content to show */
+            }
+        }
+        
+        .collapsing {
+            animation: fadeOut 0.3s ease-in-out;
+        }
+        @keyframes fadeOut {
+            from { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 3000px;
+            }
+            to { 
+                opacity: 0; 
+                transform: translateY(-10px);
+                max-height: 0;
+            }
+        }
+        
+        /* Hover effects for cards */
+        .roadmap-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Progress bar animation */
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        
+        /* Skill level indicators */
+        .skill-beginner { border-left-color: #10b981; } /* Green */
+        .skill-intermediate { border-left-color: #f59e0b; } /* Yellow/Orange */
+        .skill-advanced { border-left-color: #ef4444; } /* Red */
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .tree-node {
+                margin-left: 20px;
+            }
+            .tree-node::before {
+                left: -10px;
+                width: 10px;
+            }
+            .tree-line::before {
+                left: 10px;
+            }
+            .root-node {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+        }
+        
+        /* Floating action buttons */
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header Section -->
+    <header class="relative overflow-hidden bg-gradient-to-r from-green-600 via-teal-600 to-blue-600 text-white py-16">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="relative container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-7xl font-bold mb-6 floating">
+                🎮 Game Developer Roadmap
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                Interactive Tree Structure - From Concept to Code
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm">
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">🌳 Tree Structure</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">📱 Fully Responsive</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">✅ Progress Tracking</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">🎯 Skill Levels</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 max-w-7xl py-8">
+        <!-- Game Developer Roadmap Tree Structure -->
+        <main class="roadmap-tree">
+            <!-- Core Programming Concepts -->
+            <ul class="space-y-6">
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-beginner" onclick="toggleNode('programming-basics-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">💻</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Core Programming</h2>
+                                    <p class="text-gray-600">Fundamentals & Logic</p>
+                                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">Beginner</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="programming-basics-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🐍</span> Python Basics
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Variables, Data Types</li>
+                                    <li>• Control Flow (If/Else, Loops)</li>
+                                    <li>• Functions & Modules</li>
+                                    <li>• Object-Oriented Programming (OOP)</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">➕</span> C++ Fundamentals
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Pointers & Memory Management</li>
+                                    <li>• Classes & Objects</li>
+                                    <li>• Templates & STL</li>
+                                    <li>• Basic Data Structures</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📊</span> Data Structures & Algorithms
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Arrays, Linked Lists, Trees</li>
+                                    <li>• Sorting & Searching Algorithms</li>
+                                    <li>• Time & Space Complexity</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Game Engines -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('game-engines-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">⚙️</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Game Engines</h2>
+                                    <p class="text-gray-600">Tools for Creation</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="game-engines-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">⚫</span> Unity (C#)
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Editor Interface</li>
+                                    <li>• Scripting (MonoBehaviour)</li>
+                                    <li>• Physics & Collisions</li>
+                                    <li>• UI System (Canvas)</li>
+                                    <li>• Animation & Mecanim</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔵</span> Unreal Engine (C++/Blueprints)
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Editor & Content Browser</li>
+                                    <li>• Blueprints Visual Scripting</li>
+                                    <li>• C++ Integration</li>
+                                    <li>• Materials & Shaders</li>
+                                    <li>• Level Design & Lighting</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">✨</span> Other Engines/Frameworks
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Godot Engine (GDScript)</li>
+                                    <li>• Phaser (JavaScript 2D)</li>
+                                    <li>• Pygame (Python 2D)</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Game Design Principles -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('game-design-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">💡</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Game Design</h2>
+                                    <p class="text-gray-600">Concept & Mechanics</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="game-design-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">✍️</span> Core Concepts
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Player Experience (PX)</li>
+                                    <li>• Game Loops & Core Mechanics</li>
+                                    <li>• Level Design Principles</li>
+                                    <li>• Narrative & Storytelling</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">⚖️</span> Balancing & Progression
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Difficulty Scaling</li>
+                                    <li>• Reward Systems</li>
+                                    <li>• Economy Design</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📝</span> Documentation
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Game Design Document (GDD)</li>
+                                    <li>• Prototyping & Iteration</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Graphics & Art -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('graphics-art-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🖼️</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Graphics & Art</h2>
+                                    <p class="text-gray-600">Visuals & Assets</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="graphics-art-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🎨</span> 2D Art
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Pixel Art / Vector Art</li>
+                                    <li>• Sprites & Tilemaps</li>
+                                    <li>• UI/UX Design for Games</li>
+                                    <li>• Tools: Aseprite, Krita, Photoshop</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🧊</span> 3D Art
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Modeling & Texturing</li>
+                                    <li>• Rigging & Animation</li>
+                                    <li>• Lighting & Rendering</li>
+                                    <li>• Tools: Blender, Maya, Substance Painter</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">💡</span> Graphics Programming (Optional)
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Shaders (HLSL/GLSL)</li>
+                                    <li>• Rendering Pipelines</li>
+                                    <li>• Optimization Techniques</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Audio & Sound Design -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-beginner" onclick="toggleNode('audio-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🎧</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Audio & Sound</h2>
+                                    <p class="text-gray-600">Immersive Experience</p>
+                                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">Beginner</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="audio-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-green-50 rounded-lg p-4 border border-green-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🎶</span> Music & SFX
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Background Music (BGM)</li>
+                                    <li>• Sound Effects (SFX)</li>
+                                    <li>• Voice Acting (Optional)</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-green-50 rounded-lg p-4 border border-green-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🎚️</span> Audio Implementation
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Audio Mixers & Groups</li>
+                                    <li>• Spatial Audio</li>
+                                    <li>• Audio Libraries (FMOD, Wwise)</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Version Control & Collaboration -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-beginner" onclick="toggleNode('version-control-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🔀</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Version Control</h2>
+                                    <p class="text-gray-600">Teamwork & Tracking</p>
+                                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">Beginner</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="version-control-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🐙</span> Git & GitHub
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Repositories, Commits, Branches</li>
+                                    <li>• Merging & Conflict Resolution</li>
+                                    <li>• Git LFS (for large assets)</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🤝</span> Collaboration Tools
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Trello, Jira (Project Management)</li>
+                                    <li>• Discord, Slack (Communication)</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Game Development Specialties -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-advanced" onclick="toggleNode('specialties-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🌟</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Specialties</h2>
+                                    <p class="text-gray-600">Advanced Topics</p>
+                                    <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full mt-1">Advanced</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="specialties-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🤖</span> AI for Games
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Pathfinding (A*, Dijkstra)</li>
+                                    <li>• Behavior Trees / State Machines</li>
+                                    <li>• Decision Making</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🌐</span> Multiplayer Networking
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Client-Server Models</li>
+                                    <li>• Latency Compensation</li>
+                                    <li>• Network Libraries (Mirror, Photon)</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📈</span> Performance Optimization
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Profiling & Debugging</li>
+                                    <li>• Asset Optimization</li>
+                                    <li>• Code Efficiency</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📱</span> Mobile Game Dev
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• UI/UX for Touch</li>
+                                    <li>• Monetization Strategies</li>
+                                    <li>• Platform-specific APIs</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Deployment & Publishing -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-advanced" onclick="toggleNode('deployment-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🚀</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Deployment & Publishing</h2>
+                                    <p class="text-gray-600">Releasing Your Game</p>
+                                    <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full mt-1">Advanced</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="deployment-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-pink-50 rounded-lg p-4 border border-pink-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📦</span> Build & Export
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Platform-specific Builds (PC, Mobile, Console)</li>
+                                    <li>• Asset Bundling & Compression</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-pink-50 rounded-lg p-4 border border-pink-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">ストア</span> Storefronts
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Steam, Epic Games Store</li>
+                                    <li>• Google Play Store, Apple App Store</li>
+                                    <li>• Itch.io</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-pink-50 rounded-lg p-4 border border-pink-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📢</span> Marketing & Community
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Trailer Creation</li>
+                                    <li>• Social Media Presence</li>
+                                    <li>• Community Engagement</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </main>
+
+        <!-- Progress & Learning Path Footer -->
+        <footer class="mt-16 text-center">
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-5xl mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">🎯 Your Game Dev Journey</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600" id="explored-count">0</div>
+                        <div class="text-sm text-gray-600">Explored Topics</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600" id="total-count">7</div> <!-- Updated total sections -->
+                        <div class="text-sm text-gray-600">Total Sections</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-green-50 to-teal-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600" id="progress-percent">0%</div>
+                        <div class="text-sm text-gray-600">Progress</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-yellow-600" id="skill-level">Beginner</div>
+                        <div class="text-sm text-gray-600">Current Level</div>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
+                    <div id="progress-bar" class="progress-bar bg-gradient-to-r from-green-500 via-teal-500 to-blue-500 h-4 rounded-full" style="width: 0%"></div>
+                </div>
+                
+                <!-- Learning Path Guide -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-semibold text-green-700 mb-2">🌱 Beginner Path</h4>
+                        <p class="text-sm text-gray-600">Programming Basics → Audio → Version Control</p>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-semibold text-yellow-700 mb-2">🚀 Intermediate Path</h4>
+                        <p class="text-sm text-gray-600">Game Engines → Game Design → Graphics & Art</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-semibold text-red-700 mb-2">⚡ Advanced Path</h4>
+                        <p class="text-sm text-gray-600">Specialties → Deployment & Publishing</p>
+                    </div>
+                </div>
+                
+                <p class="text-gray-600 text-sm mb-4">
+                    💡 <strong>Suggestion</strong> Start with a simple 2D game in an easy engine like Godot or Unity to grasp core concepts.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-2 text-xs">
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Start Small</span>
+                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded">Finish Projects</span>
+                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded">Learn by Doing</span>
+                    <span class="bg-pink-100 text-pink-800 px-2 py-1 rounded">Build Portfolio</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab">
+        <button onclick="collapseAllSections()" class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg mb-3 block transition-all duration-300" title="Collapse All">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </svg>
+        </button>
+        <button onclick="expandAllSections()" class="bg-purple-500 hover:bg-purple-600 text-white p-3 rounded-full shadow-lg block transition-all duration-300" title="Expand All">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Track expanded sections for progress monitoring
+        let expandedSections = new Set();
+        
+        /**
+         * Toggle visibility of roadmap sections with smooth animations
+         * @param {string} sectionId - The ID of the section to toggle
+         */
+        function toggleNode(sectionId) {
+            const section = document.getElementById(sectionId);
+            const parentCard = section.previousElementSibling;
+            
+            if (section.classList.contains('hidden')) {
+                // Expand section with animation
+                section.classList.remove('hidden');
+                section.classList.add('fade-in');
+                parentCard.classList.add('expanded');
+                expandedSections.add(sectionId);
+                
+                // Smooth scroll to show expanded content
+                setTimeout(() => {
+                    section.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest',
+                        inline: 'nearest'
+                    });
+                }, 200);
+            } else {
+                // Collapse section with animation
+                section.classList.add('collapsing');
+                setTimeout(() => {
+                    section.classList.add('hidden');
+                    section.classList.remove('fade-in', 'collapsing');
+                    parentCard.classList.remove('expanded');
+                    expandedSections.delete(sectionId);
+                    updateProgress();
+                }, 300);
+            }
+            
+            updateProgress();
+        }
+        
+        /**
+         * Update progress statistics and visual indicators
+         */
+        function updateProgress() {
+            const totalSections = document.querySelectorAll('[id$="-section"]').length;
+            const exploredCount = expandedSections.size;
+            const progressPercent = Math.round((exploredCount / totalSections) * 100);
+            
+            // Update counter elements
+            document.getElementById('explored-count').textContent = exploredCount;
+            document.getElementById('total-count').textContent = totalSections;
+            document.getElementById('progress-percent').textContent = progressPercent + '%';
+            
+            // Update skill level based on progress
+            const skillLevelElement = document.getElementById('skill-level');
+            if (progressPercent < 30) {
+                skillLevelElement.textContent = 'Beginner';
+                skillLevelElement.className = 'text-2xl font-bold text-green-600';
+            } else if (progressPercent < 70) {
+                skillLevelElement.textContent = 'Intermediate';
+                skillLevelElement.className = 'text-2xl font-bold text-yellow-600';
+            } else {
+                skillLevelElement.textContent = 'Advanced';
+                skillLevelElement.className = 'text-2xl font-bold text-red-600';
+            }
+            
+            // Update progress bar
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = progressPercent + '%';
+            
+            // Add completion celebration
+            if (progressPercent === 100) {
+                showCompletionMessage();
+            }
+        }
+        
+        /**
+         * Show completion celebration message
+         */
+        function showCompletionMessage() {
+            const celebration = document.createElement('div');
+            celebration.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-lg shadow-xl z-50 animate-bounce';
+            celebration.innerHTML = '🎉 Congratulations! You have explored all the topics 🚀';
+            document.body.appendChild(celebration);
+            
+            // Add confetti effect
+            createConfetti();
+            
+            setTimeout(() => {
+                celebration.remove();
+            }, 5000);
+        }
+        
+        /**
+         * Create confetti animation
+         */
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    top: -10px;
+                    left: ${Math.random() * 100}%;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    z-index: 1000;
+                    animation: confetti-fall 3s linear forwards;
+                    transform: rotate(${Math.random() * 360}deg);
+                `;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+        
+        // Add confetti animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confetti-fall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        /**
+         * Collapse all expanded sections
+         */
+        function collapseAllSections() {
+            document.querySelectorAll('.tree-line:not(.hidden)').forEach(section => {
+                section.classList.add('collapsing');
+                setTimeout(() => {
+                    section.classList.add('hidden');
+                    section.classList.remove('fade-in', 'collapsing');
+                    section.previousElementSibling.classList.remove('expanded');
+                }, 300);
+            });
+            expandedSections.clear();
+            updateProgress();
+        }
+        
+        /**
+         * Expand all sections
+         */
+        function expandAllSections() {
+            document.querySelectorAll('.tree-line.hidden').forEach(section => {
+                section.classList.remove('hidden');
+                section.classList.add('fade-in');
+                section.previousElementSibling.classList.add('expanded');
+                expandedSections.add(section.id);
+            });
+            updateProgress();
+        }
+        
+        /**
+         * Enhanced hover effects for interactive cards
+         */
+        function initializeHoverEffects() {
+            document.querySelectorAll('.roadmap-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('cursor-pointer')) return;
+                    this.style.transform = 'translateY(-4px) scale(1.02)';
+                    this.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '';
+                });
+            });
+        }
+        
+        /**
+         * Keyboard navigation and shortcuts
+         */
+        function initializeKeyboardNavigation() {
+            document.addEventListener('keydown', function(e) {
+                switch(e.key) {
+                    case 'Escape':
+                        collapseAllSections();
+                        break;
+                        
+                    case 'Enter':
+                        if (document.activeElement.classList.contains('roadmap-card')) {
+                            const onclick = document.activeElement.getAttribute('onclick');
+                            if (onclick) {
+                                eval(onclick);
+                            }
+                        }
+                        break;
+                        
+                    case ' ':
+                        if (document.activeElement.classList.contains('roadmap-card')) {
+                            e.preventDefault();
+                            const onclick = document.activeElement.getAttribute('onclick');
+                            if (onclick) {
+                                eval(onclick);
+                            }
+                        }
+                        break;
+                        
+                    case 'a':
+                    case 'A':
+                        if (e.ctrlKey || e.metaKey) {
+                            e.preventDefault();
+                            expandAllSections();
+                        }
+                        break;
+                }
+            });
+        }
+        
+        /**
+         * Add accessibility features and ARIA labels
+         */
+        function initializeAccessibility() {
+            document.querySelectorAll('[onclick^="toggleNode"]').forEach(card => {
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-expanded', 'false');
+                card.setAttribute('aria-label', 'Click to expand or collapse this section');
+                
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            const isExpanded = card.classList.contains('expanded');
+                            card.setAttribute('aria-expanded', isExpanded.toString());
+                        }
+                    });
+                });
+                
+                observer.observe(card, { attributes: true });
+            });
+        }
+        
+        /**
+         * Initialize responsive behavior for mobile devices
+         */
+        function initializeResponsiveFeatures() {
+            const isMobile = window.innerWidth < 768;
+            
+            if (isMobile) {
+                document.querySelectorAll('.roadmap-card').forEach(card => {
+                    card.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.98)';
+                    });
+                    
+                    card.addEventListener('touchend', function() {
+                        this.style.transform = 'scale(1)';
+                    });
+                });
+                
+                document.querySelectorAll('[onclick^="toggleNode"]').forEach(card => {
+                    card.addEventListener('click', function() {
+                        setTimeout(() => {
+                            this.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'center' 
+                            });
+                        }, 400);
+                    });
+                });
+            }
+        }
+        
+        /**
+         * Add learning path recommendations
+         */
+        function showLearningPath() {
+            const paths = {
+                beginner: ['programming-basics-section', 'audio-section', 'version-control-section'],
+                intermediate: ['game-engines-section', 'game-design-section', 'graphics-art-section'],
+                advanced: ['specialties-section', 'deployment-section']
+            };
+            
+            // This could be expanded to show recommended learning sequences
+            console.log('Learning paths available:', paths);
+        }
+        
+        /**
+         * Initialize all interactive features when DOM is loaded
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeHoverEffects();
+            initializeKeyboardNavigation();
+            initializeAccessibility();
+            initializeResponsiveFeatures();
+            updateProgress();
+            showLearningPath();
+            
+            // Add welcome message
+            console.log('🚀 Game Developer Roadmap loaded!');
+            console.log('💡 Keyboard shortcuts:');
+            console.log('   - ESC: Collapse all sections');
+            console.log('   - Ctrl/Cmd + A: Expand all sections');
+            console.log('   - Enter/Space: Toggle focused section');
+            console.log('   - Tab: Navigate between sections');
+        });
+        
+        /**
+         * Handle window resize for responsive adjustments
+         */
+        window.addEventListener('resize', function() {
+            initializeResponsiveFeatures();
+        });
+        
+        /**
+         * Add performance monitoring
+         */
+        function monitorPerformance() {
+            if ('performance' in window) {
+                const observer = new PerformanceObserver((list) => {
+                    for (const entry of list.getEntries()) {
+                        if (entry.duration > 16) {
+                            console.warn('Slow animation detected:', entry);
+                        }
+                    }
+                });
+                observer.observe({entryTypes: ['measure']});
+            }
+        }
+        
+        // Initialize performance monitoring
+        monitorPerformance();
+        
+        /**
+         * Add local storage for progress tracking
+         */
+        function saveProgress() {
+            localStorage.setItem('roadmap-progress-game-dev', JSON.stringify([...expandedSections]));
+        }
+        
+        function loadProgress() {
+            const saved = localStorage.getItem('roadmap-progress-game-dev');
+            if (saved) {
+                const sections = JSON.parse(saved);
+                sections.forEach(sectionId => {
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        section.classList.remove('hidden');
+                        section.classList.add('fade-in');
+                        section.previousElementSibling.classList.add('expanded');
+                        expandedSections.add(sectionId);
+                    }
+                });
+                updateProgress();
+            }
+        }
+        
+        // Save progress when sections are toggled
+        const originalToggleNode = toggleNode;
+        toggleNode = function(sectionId) {
+            originalToggleNode(sectionId);
+            saveProgress();
+        };
+        
+        // Load progress on page load
+        window.addEventListener('load', loadProgress);
+    </script>
+</body>
+</html>

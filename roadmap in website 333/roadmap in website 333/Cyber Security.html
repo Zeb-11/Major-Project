@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Security Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tree structure styling with connecting lines */
+        .tree-line {
+            position: relative;
+        }
+        .tree-line::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        }
+        .tree-node {
+            position: relative;
+            margin-left: 40px;
+        }
+        .tree-node::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 20px;
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        }
+        .root-node {
+            margin-left: 8rem;
+            margin-right: 8rem;
+        }
+        .root-node::before {
+            display: none;
+        }
+        
+        /* Smooth animations for expand/collapse */
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+        .expanded .expand-icon {
+            transform: rotate(90deg);
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px); 
+                max-height: 0;
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 3000px; /* Sufficiently large to allow content to show */
+            }
+        }
+        
+        .collapsing {
+            animation: fadeOut 0.3s ease-in-out;
+        }
+        @keyframes fadeOut {
+            from { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 3000px;
+            }
+            to { 
+                opacity: 0; 
+                transform: translateY(-10px);
+                max-height: 0;
+            }
+        }
+        
+        /* Hover effects for cards */
+        .roadmap-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Progress bar animation */
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        
+        /* Skill level indicators */
+        .skill-beginner { border-left-color: #10b981; } /* Green */
+        .skill-intermediate { border-left-color: #f59e0b; } /* Yellow/Orange */
+        .skill-advanced { border-left-color: #ef4444; } /* Red */
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .tree-node {
+                margin-left: 20px;
+            }
+            .tree-node::before {
+                left: -10px;
+                width: 10px;
+            }
+            .tree-line::before {
+                left: 10px;
+            }
+            .root-node {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+        }
+        
+        /* Floating action buttons */
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header Section -->
+    <header class="relative overflow-hidden bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 text-white py-16">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="relative container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-7xl font-bold mb-6 floating">
+                🔒 Cyber Security Roadmap
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                Interactive Tree Structure - Protect, Detect, Respond
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm">
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">🌳 Tree Structure</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">📱 Fully Responsive</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">✅ Progress Tracking</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">🎯 Skill Levels</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 max-w-7xl py-8">
+        <!-- Cyber Security Roadmap Tree Structure -->
+        <main class="roadmap-tree">
+            <!-- Fundamentals -->
+            <ul class="space-y-6">
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-beginner" onclick="toggleNode('fundamentals-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🌱</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Fundamentals</h2>
+                                    <p class="text-gray-600">Core Concepts & Basics</p>
+                                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">Beginner</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="fundamentals-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-green-50 rounded-lg p-4 border border-green-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🖥️</span> Operating Systems
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Linux Basics (CLI, Permissions, Processes)</li>
+                                    <li>• Windows Fundamentals (AD, Registry, Services)</li>
+                                    <li>• File Systems</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-green-50 rounded-lg p-4 border border-green-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🌐</span> Networking
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• TCP/IP Model & Protocols (HTTP, DNS, SSH)</li>
+                                    <li>• Subnetting & Routing</li>
+                                    <li>• Firewalls & IDS/IPS</li>
+                                    <li>• Wireshark Basics</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-green-50 rounded-lg p-4 border border-green-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">💻</span> Programming Basics
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Python (Scripting, Automation)</li>
+                                    <li>• Bash Scripting</li>
+                                    <li>• Basic Data Structures & Algorithms</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-green-50 rounded-lg p-4 border border-green-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔐</span> Cryptography Basics
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Symmetric & Asymmetric Encryption</li>
+                                    <li>• Hashing & Digital Signatures</li>
+                                    <li>• PKI (Public Key Infrastructure)</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Offensive Security (Red Team) -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('offensive-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">⚔️</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Offensive Security</h2>
+                                    <p class="text-gray-600">Penetration Testing & Ethical Hacking</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="offensive-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔍</span> Reconnaissance
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• OSINT (Open Source Intelligence)</li>
+                                    <li>• Nmap (Port Scanning)</li>
+                                    <li>• Enumeration Techniques</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">💥</span> Vulnerability Assessment
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Vulnerability Scanners (Nessus, OpenVAS)</li>
+                                    <li>• CVEs & Exploit Databases</li>
+                                    <li>• Manual Vulnerability Identification</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔓</span> Exploitation
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Metasploit Framework</li>
+                                    <li>• Web Application Attacks (OWASP Top 10)</li>
+                                    <li>• Buffer Overflows</li>
+                                    <li>• Privilege Escalation</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">👻</span> Post-Exploitation & Persistence
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Lateral Movement</li>
+                                    <li>• Data Exfiltration</li>
+                                    <li>• Maintaining Access</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Defensive Security (Blue Team) -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('defensive-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🛡️</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Defensive Security</h2>
+                                    <p class="text-gray-600">Detection, Response & Prevention</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="defensive-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🚨</span> Security Operations (SOC)
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• SIEM (Splunk, ELK, QRadar)</li>
+                                    <li>• Incident Response Lifecycle</li>
+                                    <li>• Threat Intelligence</li>
+                                    <li>• Alert Triage & Analysis</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🕵️</span> Digital Forensics & Incident Response (DFIR)
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Memory Forensics (Volatility)</li>
+                                    <li>• Disk Forensics (Autopsy, FTK Imager)</li>
+                                    <li>• Network Forensics (Packet Analysis)</li>
+                                    <li>• Malware Analysis Basics</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">⚙️</span> Security Hardening
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• OS Hardening (Linux, Windows)</li>
+                                    <li>• Network Device Hardening</li>
+                                    <li>• Application Security (Secure Coding)</li>
+                                    <li>• Patch Management</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">☁️</span> Cloud Security
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• AWS/Azure/GCP Security Best Practices</li>
+                                    <li>• IAM (Identity and Access Management)</li>
+                                    <li>• Cloud Compliance & Governance</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Governance, Risk & Compliance (GRC) -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-advanced" onclick="toggleNode('grc-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">📜</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">GRC</h2>
+                                    <p class="text-gray-600">Governance, Risk & Compliance</p>
+                                    <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full mt-1">Advanced</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="grc-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📊</span> Risk Management
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Risk Identification & Assessment</li>
+                                    <li>• Risk Treatment (Mitigation, Acceptance)</li>
+                                    <li>• Business Impact Analysis (BIA)</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">⚖️</span> Compliance & Regulations
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• GDPR, HIPAA, PCI DSS</li>
+                                    <li>• ISO 27001, NIST Framework</li>
+                                    <li>• Security Audits</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📝</span> Policies & Procedures
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Developing Security Policies</li>
+                                    <li>• Incident Response Plans</li>
+                                    <li>• Disaster Recovery Plans</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Specialized Domains -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-advanced" onclick="toggleNode('specialized-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🌟</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Specialized Domains</h2>
+                                    <p class="text-gray-600">Advanced & Niche Areas</p>
+                                    <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full mt-1">Advanced</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="specialized-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🤖</span> AI/ML in Security
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Threat Detection with ML</li>
+                                    <li>• Adversarial AI</li>
+                                    <li>• Security Automation (SOAR)</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔗</span> Blockchain Security
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Smart Contract Auditing</li>
+                                    <li>• Decentralized Application Security</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🏭</span> OT/ICS Security
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• SCADA Systems</li>
+                                    <li>• Industrial Control Systems Vulnerabilities</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📱</span> Mobile Security
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Android/iOS Vulnerabilities</li>
+                                    <li>• Mobile App Pen Testing</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </main>
+
+        <!-- Progress & Learning Path Footer -->
+        <footer class="mt-16 text-center">
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-5xl mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">🎯 Your Cyber Security Journey</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600" id="explored-count">0</div>
+                        <div class="text-sm text-gray-600">Explored Topics</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600" id="total-count">5</div>
+                        <div class="text-sm text-gray-600">Total Sections</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-green-50 to-teal-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600" id="progress-percent">0%</div>
+                        <div class="text-sm text-gray-600">Progress</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-yellow-600" id="skill-level">Beginner</div>
+                        <div class="text-sm text-gray-600">Current Level</div>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
+                    <div id="progress-bar" class="progress-bar bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 h-4 rounded-full" style="width: 0%"></div>
+                </div>
+                
+                <!-- Learning Path Guide -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-semibold text-green-700 mb-2">🌱 Beginner Path</h4>
+                        <p class="text-sm text-gray-600">Fundamentals (OS, Networking, Programming, Crypto)</p>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-semibold text-yellow-700 mb-2">🚀 Intermediate Path</h4>
+                        <p class="text-sm text-gray-600">Offensive Security OR Defensive Security (Choose a path)</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-semibold text-red-700 mb-2">⚡ Advanced Path</h4>
+                        <p class="text-sm text-gray-600">GRC → Specialized Domains → Certifications</p>
+                    </div>
+                </div>
+                
+                <p class="text-gray-600 text-sm mb-4">
+                    💡 <strong>Suggestion</strong> Start with fundamentals. Decide if you prefer offensive (attacking) or defensive (protecting) security, then specialize.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-2 text-xs">
+                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded">Foundational Knowledge</span>
+                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded">Offensive Skills</span>
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Defensive Skills</span>
+                    <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded">Specialization</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab">
+        <button onclick="collapseAllSections()" class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg mb-3 block transition-all duration-300" title="Collapse All">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </svg>
+        </button>
+        <button onclick="expandAllSections()" class="bg-purple-500 hover:bg-purple-600 text-white p-3 rounded-full shadow-lg block transition-all duration-300" title="Expand All">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Track expanded sections for progress monitoring
+        let expandedSections = new Set();
+        
+        /**
+         * Toggle visibility of roadmap sections with smooth animations
+         * @param {string} sectionId - The ID of the section to toggle
+         */
+        function toggleNode(sectionId) {
+            const section = document.getElementById(sectionId);
+            const parentCard = section.previousElementSibling;
+            
+            if (section.classList.contains('hidden')) {
+                // Expand section with animation
+                section.classList.remove('hidden');
+                section.classList.add('fade-in');
+                parentCard.classList.add('expanded');
+                expandedSections.add(sectionId);
+                
+                // Smooth scroll to show expanded content
+                setTimeout(() => {
+                    section.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest',
+                        inline: 'nearest'
+                    });
+                }, 200);
+            } else {
+                // Collapse section with animation
+                section.classList.add('collapsing');
+                setTimeout(() => {
+                    section.classList.add('hidden');
+                    section.classList.remove('fade-in', 'collapsing');
+                    parentCard.classList.remove('expanded');
+                    expandedSections.delete(sectionId);
+                    updateProgress();
+                }, 300);
+            }
+            
+            updateProgress();
+        }
+        
+        /**
+         * Update progress statistics and visual indicators
+         */
+        function updateProgress() {
+            const totalSections = document.querySelectorAll('[id$="-section"]').length;
+            const exploredCount = expandedSections.size;
+            const progressPercent = Math.round((exploredCount / totalSections) * 100);
+            
+            // Update counter elements
+            document.getElementById('explored-count').textContent = exploredCount;
+            document.getElementById('total-count').textContent = totalSections;
+            document.getElementById('progress-percent').textContent = progressPercent + '%';
+            
+            // Update skill level based on progress
+            const skillLevelElement = document.getElementById('skill-level');
+            if (progressPercent < 30) {
+                skillLevelElement.textContent = 'Beginner';
+                skillLevelElement.className = 'text-2xl font-bold text-green-600';
+            } else if (progressPercent < 70) {
+                skillLevelElement.textContent = 'Intermediate';
+                skillLevelElement.className = 'text-2xl font-bold text-yellow-600';
+            } else {
+                skillLevelElement.textContent = 'Advanced';
+                skillLevelElement.className = 'text-2xl font-bold text-red-600';
+            }
+            
+            // Update progress bar
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = progressPercent + '%';
+            
+            // Add completion celebration
+            if (progressPercent === 100) {
+                showCompletionMessage();
+            }
+        }
+        
+        /**
+         * Show completion celebration message
+         */
+        function showCompletionMessage() {
+            const celebration = document.createElement('div');
+            celebration.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-lg shadow-xl z-50 animate-bounce';
+            celebration.innerHTML = '🎉 Congratulations! You have explored all the topics 🚀';
+            document.body.appendChild(celebration);
+            
+            // Add confetti effect
+            createConfetti();
+            
+            setTimeout(() => {
+                celebration.remove();
+            }, 5000);
+        }
+        
+        /**
+         * Create confetti animation
+         */
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    top: -10px;
+                    left: ${Math.random() * 100}%;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    z-index: 1000;
+                    animation: confetti-fall 3s linear forwards;
+                    transform: rotate(${Math.random() * 360}deg);
+                `;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+        
+        // Add confetti animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confetti-fall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        /**
+         * Collapse all expanded sections
+         */
+        function collapseAllSections() {
+            document.querySelectorAll('.tree-line:not(.hidden)').forEach(section => {
+                section.classList.add('collapsing');
+                setTimeout(() => {
+                    section.classList.add('hidden');
+                    section.classList.remove('fade-in', 'collapsing');
+                    section.previousElementSibling.classList.remove('expanded');
+                }, 300);
+            });
+            expandedSections.clear();
+            updateProgress();
+        }
+        
+        /**
+         * Expand all sections
+         */
+        function expandAllSections() {
+            document.querySelectorAll('.tree-line.hidden').forEach(section => {
+                section.classList.remove('hidden');
+                section.classList.add('fade-in');
+                section.previousElementSibling.classList.add('expanded');
+                expandedSections.add(section.id);
+            });
+            updateProgress();
+        }
+        
+        /**
+         * Enhanced hover effects for interactive cards
+         */
+        function initializeHoverEffects() {
+            document.querySelectorAll('.roadmap-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('cursor-pointer')) return;
+                    this.style.transform = 'translateY(-4px) scale(1.02)';
+                    this.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '';
+                });
+            });
+        }
+        
+        /**
+         * Keyboard navigation and shortcuts
+         */
+        function initializeKeyboardNavigation() {
+            document.addEventListener('keydown', function(e) {
+                switch(e.key) {
+                    case 'Escape':
+                        collapseAllSections();
+                        break;
+                        
+                    case 'Enter':
+                        if (document.activeElement.classList.contains('roadmap-card')) {
+                            const onclick = document.activeElement.getAttribute('onclick');
+                            if (onclick) {
+                                eval(onclick);
+                            }
+                        }
+                        break;
+                        
+                    case ' ':
+                        if (document.activeElement.classList.contains('roadmap-card')) {
+                            e.preventDefault();
+                            const onclick = document.activeElement.getAttribute('onclick');
+                            if (onclick) {
+                                eval(onclick);
+                            }
+                        }
+                        break;
+                        
+                    case 'a':
+                    case 'A':
+                        if (e.ctrlKey || e.metaKey) {
+                            e.preventDefault();
+                            expandAllSections();
+                        }
+                        break;
+                }
+            });
+        }
+        
+        /**
+         * Add accessibility features and ARIA labels
+         */
+        function initializeAccessibility() {
+            document.querySelectorAll('[onclick^="toggleNode"]').forEach(card => {
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-expanded', 'false');
+                card.setAttribute('aria-label', 'Click to expand or collapse this section');
+                
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            const isExpanded = card.classList.contains('expanded');
+                            card.setAttribute('aria-expanded', isExpanded.toString());
+                        }
+                    });
+                });
+                
+                observer.observe(card, { attributes: true });
+            });
+        }
+        
+        /**
+         * Initialize responsive behavior for mobile devices
+         */
+        function initializeResponsiveFeatures() {
+            const isMobile = window.innerWidth < 768;
+            
+            if (isMobile) {
+                document.querySelectorAll('.roadmap-card').forEach(card => {
+                    card.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.98)';
+                    });
+                    
+                    card.addEventListener('touchend', function() {
+                        this.style.transform = 'scale(1)';
+                    });
+                });
+                
+                document.querySelectorAll('[onclick^="toggleNode"]').forEach(card => {
+                    card.addEventListener('click', function() {
+                        setTimeout(() => {
+                            this.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'center' 
+                            });
+                        }, 400);
+                    });
+                });
+            }
+        }
+        
+        /**
+         * Add learning path recommendations
+         */
+        function showLearningPath() {
+            const paths = {
+                beginner: ['fundamentals-section'],
+                intermediate: ['offensive-section', 'defensive-section'], // Users can choose one or both
+                advanced: ['grc-section', 'specialized-section']
+            };
+            
+            // This could be expanded to show recommended learning sequences
+            console.log('Learning paths available:', paths);
+        }
+        
+        /**
+         * Initialize all interactive features when DOM is loaded
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeHoverEffects();
+            initializeKeyboardNavigation();
+            initializeAccessibility();
+            initializeResponsiveFeatures();
+            updateProgress();
+            showLearningPath();
+            
+            // Add welcome message
+            console.log('🚀 Cyber Security Roadmap loaded!');
+            console.log('💡 Keyboard shortcuts:');
+            console.log('   - ESC: Collapse all sections');
+            console.log('   - Ctrl/Cmd + A: Expand all sections');
+            console.log('   - Enter/Space: Toggle focused section');
+            console.log('   - Tab: Navigate between sections');
+        });
+        
+        /**
+         * Handle window resize for responsive adjustments
+         */
+        window.addEventListener('resize', function() {
+            initializeResponsiveFeatures();
+        });
+        
+        /**
+         * Add performance monitoring
+         */
+        function monitorPerformance() {
+            if ('performance' in window) {
+                const observer = new PerformanceObserver((list) => {
+                    for (const entry of list.getEntries()) {
+                        if (entry.duration > 16) {
+                            console.warn('Slow animation detected:', entry);
+                        }
+                    }
+                });
+                observer.observe({entryTypes: ['measure']});
+            }
+        }
+        
+        // Initialize performance monitoring
+        monitorPerformance();
+        
+        /**
+         * Add local storage for progress tracking
+         */
+        function saveProgress() {
+            localStorage.setItem('cybersec-roadmap-progress', JSON.stringify([...expandedSections]));
+        }
+        
+        function loadProgress() {
+            const saved = localStorage.getItem('cybersec-roadmap-progress');
+            if (saved) {
+                const sections = JSON.parse(saved);
+                sections.forEach(sectionId => {
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        section.classList.remove('hidden');
+                        section.classList.add('fade-in');
+                        section.previousElementSibling.classList.add('expanded');
+                        expandedSections.add(sectionId);
+                    }
+                });
+                updateProgress();
+            }
+        }
+        
+        // Save progress when sections are toggled
+        const originalToggleNode = toggleNode;
+        toggleNode = function(sectionId) {
+            originalToggleNode(sectionId);
+            saveProgress();
+        };
+        
+        // Load progress on page load
+        window.addEventListener('load', loadProgress);
+    </script>
+</body>
+</html>

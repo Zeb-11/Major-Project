@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Step - Subscription Plans</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #0d6efd 0%, #084298 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #ffd43b;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: #ffd43b;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(13, 110, 253, 0.9), rgba(8, 66, 152, 0.9)), url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1600&q=80') center/cover;
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: #ffd43b;
+            color: #212529;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,212,59,0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,212,59,0.6);
+            background: #ffc107;
+        }
+
+        /* Plans Section */
+        .plans-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #0d6efd;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #0d6efd;
+            border-radius: 2px;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+        }
+
+        .plan-card.popular {
+            border: 2px solid #0d6efd;
+            transform: scale(1.05);
+        }
+
+        .plan-card.popular::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #0d6efd;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 0 16px 0 16px;
+        }
+
+        .plan-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0d6efd;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: #6c757d;
+            font-weight: 400;
+        }
+
+        .plan-description {
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .plan-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            color: #0d6efd;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+        }
+
+        .subscribe-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .subscribe-btn:hover {
+            background: #084298;
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: linear-gradient(135deg, #0d6efd 0%, #084298 100%);
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .feature-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffd43b;
+        }
+
+        .feature-card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card-desc {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #495057;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            color: #0d6efd;
+        }
+
+        .author-info p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #212529;
+            color: white;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: #0d6efd;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .plan-card.popular {
+                transform: none;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .plan-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">Next<span>Step</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elevate Your Career Journey</h1>
+            <p>Choose the perfect plan to unlock your professional potential and land your dream job</p>
+            <button class="cta-button" onclick="scrollToPlans()">Explore Plans</button>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="plans-section" id="plans">
+        <h2 class="section-title">Choose Your Career Path</h2>
+        <div class="plans-grid">
+            <!-- Starter Plan -->
+            <div class="plan-card">
+                <div class="plan-header">
+                    <h3 class="plan-name">Starter</h3>
+                    <div class="plan-price">$9<span>/month</span></div>
+                    <p class="plan-description">Perfect for job seekers starting their journey</p>
+                </div>
+                <div class="plan-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Basic Resume Review</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Job Search Access</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Email Support</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Career Assessment</span>
+                    </div>
+                </div>
+                <button class="subscribe-btn" onclick="subscribePlan('Starter')">Get Started</button>
+            </div>
+
+            <!-- Explorer Plan -->
+            <div class="plan-card">
+                <div class="plan-header">
+                    <h3 class="plan-name">Explorer</h3>
+                    <div class="plan-price">$19<span>/month</span></div>
+                    <p class="plan-description">For those exploring career options</p>
+                </div>
+                <div class="plan-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Professional Resume Writing</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Personalized Job Matches</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Career Coaching Sessions (2/month)</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Interview Preparation</span>
+                    </div>
+                </div>
+                <button class="subscribe-btn" onclick="subscribePlan('Explorer')">Choose Plan</button>
+            </div>
+
+            <!-- Professional Plan -->
+            <div class="plan-card popular">
+                <div class="plan-header">
+                    <h3 class="plan-name">Professional</h3>
+                    <div class="plan-price">$29<span>/month</span></div>
+                    <p class="plan-description">Most popular choice for serious job seekers</p>
+                </div>
+                <div class="plan-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Premium Resume & Cover Letter</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Priority Job Applications</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Unlimited Career Coaching</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">LinkedIn Profile Optimization</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Mock Interviews</span>
+                    </div>
+                </div>
+                <button class="subscribe-btn" onclick="subscribePlan('Professional')">Choose Plan</button>
+            </div>
+
+            <!-- Executive Plan -->
+            <div class="plan-card">
+                <div class="plan-header">
+                    <h3 class="plan-name">Executive</h3>
+                    <div class="plan-price">$49<span>/month</span></div>
+                    <p class="plan-description">For executives and senior professionals</p>
+                </div>
+                <div class="plan-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Executive Resume Package</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Headhunter Introduction</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Salary Negotiation Coaching</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Executive Branding</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">24/7 Priority Support</span>
+                    </div>
+                </div>
+                <button class="subscribe-btn" onclick="subscribePlan('Executive')">Choose Plan</button>
+            </div>
+
+            <!-- Corporate Plan -->
+            <div class="plan-card">
+                <div class="plan-header">
+                    <h3 class="plan-name">Corporate</h3>
+                    <div class="plan-price">$79<span>/month</span></div>
+                    <p class="plan-description">For teams and corporate clients</p>
+                </div>
+                <div class="plan-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Multiple User Accounts</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Team Management Dashboard</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Custom Training Programs</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Bulk Job Posting</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Dedicated Account Manager</span>
+                    </div>
+                </div>
+                <button class="subscribe-btn" onclick="subscribePlan('Corporate')">Choose Plan</button>
+            </div>
+
+            <!-- Elite Plan -->
+            <div class="plan-card">
+                <div class="plan-header">
+                    <h3 class="plan-name">Elite</h3>
+                    <div class="plan-price">$129<span>/month</span></div>
+                    <p class="plan-description">The ultimate career transformation package</p>
+                </div>
+                <div class="plan-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Everything in Executive</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Personal Career Strategist</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Guaranteed Job Placement*</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Networking Events Access</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">Lifetime Career Support</span>
+                    </div>
+                </div>
+                <button class="subscribe-btn" onclick="subscribePlan('Elite')">Choose Plan</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2 class="section-title" style="color: white;">Why Choose Next Step?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-card-icon">📝</div>
+                <h3 class="feature-card-title">Expert Resume Building</h3>
+                <p class="feature-card-desc">Professional resume writers craft compelling documents that get you noticed by employers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">🎯</div>
+                <h3 class="feature-card-title">Smart Job Matching</h3>
+                <p class="feature-card-desc">AI-powered matching connects you with opportunities that fit your skills and aspirations.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">👥</div>
+                <h3 class="feature-card-title">Career Coaching</h3>
+                <p class="feature-card-desc">Experienced coaches provide personalized guidance throughout your job search journey.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">💼</div>
+                <h3 class="feature-card-title">Interview Preparation</h3>
+                <p class="feature-card-desc">Master the art of interviewing with mock sessions and comprehensive feedback.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="section-title">Success Stories</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Next Step helped me land my dream job in tech within 2 months. The career coaching was invaluable!"</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Professional headshot of a satisfied male customer" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <p>Software Engineer at TechCorp</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The resume service transformed my career profile. I received 3 job offers in the first week!"</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="Professional headshot of a satisfied female customer" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Marketing Director at BrandWorks</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"As an executive, the personalized approach and networking opportunities were game-changing."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80" alt="Professional headshot of a satisfied executive customer" class="author-avatar">
+                    <div class="author-info">
+                        <h4>David Martinez</h4>
+                        <p>VP of Operations at GlobalInc</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon">📘</a>
+                <a href="#" class="social-icon">📱</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">💼</a>
+            </div>
+            <p class="copyright">© 2024 Next Step Career Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling function
+        function scrollToPlans() {
+            document.getElementById('plans').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Plan subscription function
+        function subscribePlan(planName) {
+            alert(`Thank you for choosing the ${planName} plan! You will be redirected to the payment page.`);
+            // In a real implementation, this would redirect to a payment page
+        }
+
+        // Add hover effects programmatically
+        document.addEventListener('DOMContentLoaded', function() {
+            const planCards = document.querySelectorAll('.plan-card');
+            const buttons = document.querySelectorAll('button');
+            
+            // Enhanced hover effects
+            planCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-8px)';
+                    card.style.boxShadow = '0 16px 48px rgba(0,0,0,0.15)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    if (!card.classList.contains('popular')) {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = '0 8px 32px rgba(0,0,0,0.1)';
+                    } else {
+                        card.style.transform = 'scale(1.05)';
+                    }
+                });
+            });
+
+            // Button hover effects
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    button.style.transform = 'translateY(-2px)';
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

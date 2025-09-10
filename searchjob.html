@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Step - Find Your Dream Job</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --dark-gray: #374151;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary-blue);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-blue);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin: -50px auto 3rem;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .toggle-filters {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Advanced Filters */
+        .advanced-filters {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .advanced-filters.show {
+            display: grid;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* Companies Section */
+        .companies-section {
+            padding: 3rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .company-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        .company-info h3 {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .company-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .company-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .view-jobs {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-jobs:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* Company Detail Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--white);
+            margin: 2rem auto;
+            max-width: 800px;
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .company-detail-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .company-detail-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            margin-right: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        .company-detail-info h2 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .company-detail-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .company-detail-meta span {
+            background: var(--light-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .company-detail-content {
+            margin-bottom: 2rem;
+        }
+
+        .company-detail-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .company-detail-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .benefit-item {
+            background: var(--light-blue);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .benefit-item i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .open-positions {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .apply-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .apply-btn:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--light-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .advanced-filters {
+                grid-template-columns: 1fr;
+            }
+
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .company-detail-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .company-detail-logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--dark-gray);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Next<span>Step</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Companies</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Sign In</button>
+                    <button class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Find Your Next Career Move</h1>
+            <p>Discover thousands of job opportunities from top companies. Your dream job is just a search away.</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <div class="container">
+        <div class="search-section">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Job title, keywords, or company..." id="mainSearch">
+                <input type="text" class="search-input" placeholder="Location, city, or remote..." id="locationSearch">
+                <button class="btn btn-primary" id="searchBtn">Search</button>
+            </div>
+            <button class="toggle-filters" id="toggleFilters">
+                <i class="fas fa-sliders-h"></i> Advanced Filters
+            </button>
+            
+            <div class="advanced-filters" id="advancedFilters">
+                <div class="filter-group">
+                    <label for="jobType">Job Type</label>
+                    <select id="jobType">
+                        <option value="">Any Type</option>
+                        <option value="fulltime">Full Time</option>
+                        <option value="parttime">Part Time</option>
+                        <option value="contract">Contract</option>
+                        <option value="internship">Internship</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="experience">Experience Level</label>
+                    <select id="experience">
+                        <option value="">Any Level</option>
+                        <option value="entry">Entry Level</option>
+                        <option value="mid">Mid Level</option>
+                        <option value="senior">Senior Level</option>
+                        <option value="executive">Executive</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry">
+                        <option value="">All Industries</option>
+                        <option value="tech">Technology</option>
+                        <option value="finance">Finance</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="education">Education</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="retail">Retail</option>
+                        <option value="energy">Energy</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="salary">Salary Range</label>
+                    <select id="salary">
+                        <option value="">Any Salary</option>
+                        <option value="0-50">$0 - $50k</option>
+                        <option value="50-100">$50k - $100k</option>
+                        <option value="100-150">$100k - $150k</option>
+                        <option value="150+">$150k+</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Companies Section -->
+    <section class="companies-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Companies</h2>
+                <p>Discover opportunities from leading organizations</p>
+            </div>
+            
+            <div class="companies-grid" id="companiesGrid">
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading companies...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Detail Modal -->
+    <div class="modal" id="companyModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div id="companyDetailContent">
+                <!-- Company details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>NextStep</h3>
+                    <p>Connecting talented professionals with amazing opportunities since 2024.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>For Job Seekers</h3>
+                    <ul>
+                        <li><a href="#">Browse Jobs</a></li>
+                        <li><a href="#">Career Advice</a></li>
+                        <li><a href="#">Resume Builder</a></li>
+                        <li><a href="#">Salary Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>For Employers</h3>
+                    <ul>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Browse Candidates</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Employer Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NextStep. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Generate company data with 50 companies
+        const generateCompanies = () => {
+            const industries = ['Technology', 'Finance', 'Healthcare', 'Education', 'Marketing', 'Manufacturing', 'Retail', 'Energy'];
+            const locations = ['San Francisco, CA', 'New York, NY', 'Chicago, IL', 'Austin, TX', 'Los Angeles, CA', 'Seattle, WA', 'Denver, CO', 'Portland, OR', 'Dallas, TX', 'Charlotte, NC'];
+            const colors = ['#3b82f6', '#10b981', '#ef4444', '#8b5cf6', '#f59e0b', '#06b6d4', '#22c55e', '#ec4899', '#6366f1', '#059669'];
+            const tags = ['Remote', 'Hybrid', 'On-site', 'Health Insurance', '401k', 'Flexible Hours', 'Bonus', 'Stock Options', 'Professional Development', 'Team Events'];
+            
+            const companies = [];
+            
+            for (let i = 1; i <= 50; i++) {
+                const industry = industries[Math.floor(Math.random() * industries.length)];
+                const location = locations[Math.floor(Math.random() * locations.length)];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const companyTags = [...new Set(Array(3).fill(0).map(() => tags[Math.floor(Math.random() * tags.length)]))];
+                
+                companies.push({
+                    id: i,
+                    name: `${industry} Company ${i}`,
+                    logo: industry.slice(0, 2).toUpperCase(),
+                    color: color,
+                    industry: industry,
+                    location: location,
+                    jobs: Math.floor(Math.random() * 30) + 10,
+                    tags: companyTags,
+                    description: `Leading ${industry.toLowerCase()} company providing innovative solutions and services. We focus on excellence and innovation in our field.`,
+                    founded: 2000 + Math.floor(Math.random() * 20),
+                    employees: `${Math.floor(Math.random() * 9000) + 1000}+`,
+                    website: `https://${industry.toLowerCase()}company${i}.com`,
+                    benefits: ['Health Insurance', '401k Matching', 'Flexible Hours', 'Professional Development', 'Paid Time Off'],
+                    openPositions: Array(5).fill(0).map((_, idx) => `${industry} ${['Specialist', 'Manager', 'Engineer', 'Analyst', 'Consultant'][idx]}`)
+                });
+            }
+            
+            return companies;
+        };
+
+        const companies = generateCompanies();
+
+        // Generate company cards
+        function generateCompanyCards() {
+            const companiesGrid = document.getElementById('companiesGrid');
+            companiesGrid.innerHTML = '';
+            
+            companies.forEach(company => {
+                const card = document.createElement('div');
+                card.className = 'company-card';
+                card.setAttribute('data-company-id', company.id);
+                
+                card.innerHTML = `
+                    <div class="company-logo" style="background-color: ${company.color}">
+                        ${company.logo}
+                    </div>
+                    <div class="company-info">
+                        <h3>${company.name}</h3>
+                        <div class="company-meta">
+                            <span><i class="fas fa-building"></i> ${company.industry}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${company.location}</span>
+                        </div>
+                        <div class="company-tags">
+                            ${company.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="company-meta">
+                            <span><i class="fas fa-briefcase"></i> ${company.jobs} Open Positions</span>
+                        </div>
+                        <button class="view-jobs">View Details</button>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => showCompanyDetails(company.id));
+                companiesGrid.appendChild(card);
+            });
+        }
+
+        // Show company details in modal
+        function showCompanyDetails(companyId) {
+            const company = companies.find(c => c.id === companyId);
+            if (!company) return;
+            
+            const modalContent = document.getElementById('companyDetailContent');
+            modalContent.innerHTML = `
+                <div class="company-detail-header">
+                    <div class="company-detail-logo" style="background-color: ${company.color}">
+                        ${company.logo}
+                    </div>
+                    <div class="company-detail-info">
+                        <h2>${company.name}</h2>
+                        <div class="company-detail-meta">
+                            <span><i class="fas fa-building"></i> ${company.industry}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${company.location}</span>
+                            <span><i class="fas fa-users"></i> ${company.employees} employees</span>
+                            <span><i class="fas fa-calendar"></i> Founded ${company.founded}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="company-detail-content">
+                    <div class="company-detail-section">
+                        <h3>About Us</h3>
+                        <p>${company.description}</p>
+                        <p>We pride ourselves on innovation, quality, and creating a positive impact in our industry.</p>
+                    </div>
+                    
+                    <div class="company-detail-section">
+                        <h3>Benefits & Perks</h3>
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <i class="fas fa-heartbeat"></i>
+                                <p>Health Insurance</p>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <p>Professional Development</p>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-home"></i>
+                                <p>${company.tags.includes('Remote') ? 'Remote Work' : 'Flexible Hours'}</p>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <p>Competitive Salary</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="company-detail-section">
+                        <h3>Open Positions (${company.jobs})</h3>
+                        <div class="open-positions">
+                            <ul>
+                                ${company.openPositions.map(position => `<li><strong>${position}</strong> - ${company.location}</li>`).join('')}
+                            </ul>
+                            <p style="margin-top: 1rem; color: var(--dark-gray);">Competitive salary packages and comprehensive benefits included.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="apply-btn">Apply Now</button>
+            `;
+            
+            document.getElementById('companyModal').style.display = 'block';
+        }
+
+        // Toggle advanced filters
+        document.getElementById('toggleFilters').addEventListener('click', function() {
+            const filters = document.getElementById('advancedFilters');
+            filters.classList.toggle('show');
+            
+            if (filters.classList.contains('show')) {
+                this.innerHTML = '<i class="fas fa-times"></i> Hide Filters';
+            } else {
+                this.innerHTML = '<i class="fas fa-sliders-h"></i> Advanced Filters';
+            }
+        });
+
+        // Close modal
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('companyModal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('companyModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Search functionality
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const searchTerm = document.getElementById('mainSearch').value.toLowerCase();
+            const locationTerm = document.getElementById('locationSearch').value.toLowerCase();
+            
+            const filteredCompanies = companies.filter(company => 
+                company.name.toLowerCase().includes(searchTerm) ||
+                company.industry.toLowerCase().includes(searchTerm) ||
+                company.location.toLowerCase().includes(locationTerm)
+            );
+            
+            updateCompaniesGrid(filteredCompanies);
+        });
+
+        function updateCompaniesGrid(filteredCompanies) {
+            const companiesGrid = document.getElementById('companiesGrid');
+            companiesGrid.innerHTML = '';
+            
+            if (filteredCompanies.length === 0) {
+                companiesGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <h3>No companies found matching your criteria</h3>
+                        <p>Try adjusting your search terms or filters</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredCompanies.forEach(company => {
+                const card = document.createElement('div');
+                card.className = 'company-card';
+                card.setAttribute('data-company-id', company.id);
+                
+                card.innerHTML = `
+                    <div class="company-logo" style="background-color: ${company.color}">
+                        ${company.logo}
+                    </div>
+                    <div class="company-info">
+                        <h3>${company.name}</h3>
+                        <div class="company-meta">
+                            <span><i class="fas fa-building"></i> ${company.industry}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${company.location}</span>
+                        </div>
+                        <div class="company-tags">
+                            ${company.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="company-meta">
+                            <span><i class="fas fa-briefcase"></i> ${company.jobs} Open Positions</span>
+                        </div>
+                        <button class="view-jobs">View Details</button>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => showCompanyDetails(company.id));
+                companiesGrid.appendChild(card);
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                generateCompanyCards();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

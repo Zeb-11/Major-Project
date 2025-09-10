@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Step - Professional Resume Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .a4-container {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            padding: 20mm;
+            position: relative;
+        }
+        
+        .template-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-5px);
+            border-color: #205de0;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+        }
+        
+        .editor-toolbar {
+            background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
+            border-bottom: 3px solid #1e40af;
+        }
+        
+        .tool-button {
+            transition: all 0.2s ease;
+        }
+        
+        .tool-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .scroll-container {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .template-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .a4-container {
+                width: 100%;
+                min-height: auto;
+                margin: 10px;
+                padding: 15px;
+            }
+        }
+        
+        .floating-action {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #1242a3, #3b82f6, #125fb7);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .back-button {
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .back-button.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+         
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+           
+                   <a href="#" class="logo">Next<span>Step</span></a>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <!-- Back Button -->
+                    <button id="backButton" class="back-button mr-2 text-blue-600 hover:text-blue-800 transition-colors" onclick="goBack()">
+                        <i class="fas fa-arrow-left text-xl"></i>
+                    </button>
+                    
+                 
+                </div>
+                
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-800">Templates</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-800">Features</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-800">Pricing</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="progress-bar"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+        <!-- Template Selection Section -->
+        <section id="templateSection" class="py-8">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-blue-900 mb-4">Choose Your Perfect Resume Template</h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        Select from 20 professionally designed templates to create your standout resume
+                    </p>
+                </div>
+                
+                <div class="scroll-container">
+                    <div class="template-grid">
+                        <!-- Template 1 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(1)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/617598d3-f987-4f24-b390-d441b8555f18.png" alt="Modern professional resume template with blue accents and clean typography layout" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Modern Professional</h3>
+                            <p class="text-sm text-gray-600">Clean and contemporary design</p>
+                        </div>
+                        
+                        <!-- Template 2 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(2)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e5d4929e-8ecf-4680-a669-17d20abd6154.png" alt="Creative artistic resume design with asymmetrical layout and vibrant color blocks" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Creative Artist</h3>
+                            <p class="text-sm text-gray-600">For creative professionals</p>
+                        </div>
+                        
+                        <!-- Template 3 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(3)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/81a68d04-ee6a-47de-b84b-7fef9f2b15a5.png" alt="Executive resume template with sophisticated dark blue accents and gold highlights" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Executive Suite</h3>
+                            <p class="text-sm text-gray-600">For senior leadership roles</p>
+                        </div>
+                        
+                        <!-- Template 4 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(4)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/26f1c7e5-5f74-412d-b1e1-5a31330b83a7.png" alt="Minimalist resume design with ample white space and elegant typography hierarchy" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Minimalist Elegance</h3>
+                            <p class="text-sm text-gray-600">Simple yet powerful</p>
+                        </div>
+                        
+                        <!-- Template 5 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(5)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4d54fe05-01bb-4428-b34b-dddb0f8996d8.png" alt="Tech industry resume with modern geometric patterns and coding-inspired elements" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Tech Innovator</h3>
+                            <p class="text-sm text-gray-600">Perfect for tech professionals</p>
+                        </div>
+                        
+                        <!-- Template 6 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(6)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b29aaa4e-c9a0-4634-a346-5fd6eea85279.png" alt="Academic CV template with formal structure and research-focused sections" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Academic Scholar</h3>
+                            <p class="text-sm text-gray-600">For academic positions</p>
+                        </div>
+                        
+                        <!-- Template 7 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(7)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/147a8933-ec92-418d-ab2a-1d26b77ef913.png" alt="Bold contemporary resume with vibrant color blocking and modern font combinations" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Bold Contemporary</h3>
+                            <p class="text-sm text-gray-600">Make a strong statement</p>
+                        </div>
+                        
+                        <!-- Template 8 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(8)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/38741a56-4b1b-45ff-90c1-6bdaf325bd9a.png" alt="Classic traditional resume with timeless layout and professional serif typography" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Classic Professional</h3>
+                            <p class="text-sm text-gray-600">Timeless and trusted</p>
+                        </div>
+                        
+                        <!-- Additional templates would continue similarly -->
+                        <!-- Template 9 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(9)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/617598d3-f987-4f24-b390-d441b8555f18.png" alt="Modern corporate resume with professional layout and business-oriented design elements" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Corporate Elite</h3>
+                            <p class="text-sm text-gray-600">For corporate professionals</p>
+                        </div>
+                        
+                        <!-- Template 10 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(10)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e5d4929e-8ecf-4680-a669-17d20abd6154.png" alt="Creative marketing resume with colorful design and modern marketing elements" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Marketing Pro</h3>
+                            <p class="text-sm text-gray-600">For marketing professionals</p>
+                        </div>
+                        
+                        <!-- Template 11 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(11)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/81a68d04-ee6a-47de-b84b-7fef9f2b15a5.png" alt="Design-focused resume with artistic layout and creative visual elements" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Design Visionary</h3>
+                            <p class="text-sm text-gray-600">For designers and artists</p>
+                        </div>
+                        
+                        <!-- Template 12 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(12)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/26f1c7e5-5f74-412d-b1e1-5a31330b83a7.png" alt="Healthcare professional resume with clean medical-themed design" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Healthcare Hero</h3>
+                            <p class="text-sm text-gray-600">For medical professionals</p>
+                        </div>
+                        
+                        <!-- Template 13 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(13)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4d54fe05-01bb-4428-b34b-dddb0f8996d8.png" alt="Education-focused resume with academic design elements" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Education Expert</h3>
+                            <p class="text-sm text-gray-600">For teachers and educators</p>
+                        </div>
+                        
+                        <!-- Template 14 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(14)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b29aaa4e-c9a0-4634-a346-5fd6eea85279.png" alt="Sales professional resume with dynamic business design" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Sales Champion</h3>
+                            <p class="text-sm text-gray-600">For sales professionals</p>
+                        </div>
+                        
+                        <!-- Template 15 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(15)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/147a8933-ec92-418d-ab2a-1d26b77ef913.png" alt="Finance professional resume with elegant financial design elements" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Finance Pro</h3>
+                            <p class="text-sm text-gray-600">For finance professionals</p>
+                        </div>
+                        
+                        <!-- Template 16 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(16)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/38741a56-4b1b-45ff-90c1-6bdaf325bd9a.png" alt="Legal professional resume with formal legal design elements" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Legal Eagle</h3>
+                            <p class="text-sm text-gray-600">For legal professionals</p>
+                        </div>
+                        
+                        <!-- Template 17 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(17)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/617598d3-f987-4f24-b390-d441b8555f18.png" alt="Engineering resume with technical design elements and modern layout" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Engineering Genius</h3>
+                            <p class="text-sm text-gray-600">For engineering professionals</p>
+                        </div>
+                        
+                        <!-- Template 18 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(18)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e5d4929e-8ecf-4680-a669-17d20abd6154.png" alt="Startup entrepreneur resume with modern innovative design" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Startup Founder</h3>
+                            <p class="text-sm text-gray-600">For entrepreneurs</p>
+                        </div>
+                        
+                        <!-- Template 19 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(19)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/81a68d04-ee6a-47de-b84b-7fef9f2b15a5.png" alt="Consulting professional resume with business consulting design" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Consulting Pro</h3>
+                            <p class="text-sm text-gray-600">For consulting professionals</p>
+                        </div>
+                        
+                        <!-- Template 20 -->
+                        <div class="template-card bg-white rounded-xl p-4 cursor-pointer" onclick="selectTemplate(20)">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/26f1c7e5-5f74-412d-b1e1-5a31330b83a7.png" alt="Executive assistant resume with professional organizational design" class="w-full h-64 object-cover rounded-lg mb-3">
+                            <h3 class="font-semibold text-blue-800">Executive Assistant</h3>
+                            <p class="text-sm text-gray-600">For administrative professionals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Editor Section (Initially hidden) -->
+        <section id="editorSection" class="py-8 hidden">
+            <div class="container mx-auto px-4">
+                <!-- Editor Toolbar -->
+                <div class="editor-toolbar rounded-t-lg p-3 mb-6 flex flex-wrap items-center gap-2">
+                    <div class="flex items-center space-x-1">
+                        <button class="tool-button text-white p-2 rounded" title="Bold"><i class="fas fa-bold"></i></button>
+                        <button class="tool-button text-white p-2 rounded" title="Italic"><i class="fas fa-italic"></i></button>
+                        <button class="tool-button text-white p-2 rounded" title="Underline"><i class="fas fa-underline"></i></button>
+                    </div>
+                    
+                    <div class="flex items-center space-x-1">
+                        <button class="tool-button text-white p-2 rounded" title="Align Left"><i class="fas fa-align-left"></i></button>
+                        <button class="tool-button text-white p-2 rounded" title="Align Center"><i class="fas fa-align-center"></i></button>
+                        <button class="tool-button text-white p-2 rounded" title="Align Right"><i class="fas fa-align-right"></i></button>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2">
+                        <select class="bg-white bg-opacity-20 text-white border-none rounded px-2 py-1">
+                            <option value="12">12px</option>
+                            <option value="14">14px</option>
+                            <option value="16">16px</option>
+                            <option value="18">18px</option>
+                            <option value="24">24px</option>
+                        </select>
+                        
+                        <input type="color" class="bg-white bg-opacity-20 border-none rounded w-8 h-8" value="#2563eb">
+                    </div>
+                    
+                    <div class="flex items-center space-x-1 ml-auto">
+                        <button class="tool-button text-white p-2 rounded" title="Undo"><i class="fas fa-undo"></i></button>
+                        <button class="tool-button text-white p-2 rounded" title="Redo"><i class="fas fa-redo"></i></button>
+                        <button class="tool-button text-white p-2 rounded" title="Save"><i class="fas fa-save"></i></button>
+                        <button class="tool-button text-white p-2 rounded" title="Download"><i class="fas fa-download"></i></button>
+                        <button class="tool-button text-white p-2 rounded" title="Print"><i class="fas fa-print"></i></button>
+                    </div>
+                </div>
+
+                <!-- A4 Editor Container -->
+                <div class="scroll-container">
+                    <div class="a4-container" contenteditable="true">
+                        <h1 class="text-3xl font-bold text-blue-800 mb-4">Your Name</h1>
+                        <p class="text-gray-600 mb-6">Professional Title | Location | Contact Information</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                            <div class="md:col-span-2">
+                                <h2 class="text-xl font-semibold text-blue-700 mb-4 border-b-2 border-blue-200 pb-2">Professional Summary</h2>
+                                <p class="text-gray-700">Experienced professional with a proven track record of success. Skilled in various areas with strong leadership capabilities and excellent problem-solving skills.</p>
+                            </div>
+                            
+                            <div>
+                                <h2 class="text-xl font-semibold text-blue-700 mb-4 border-b-2 border-blue-200 pb-2">Skills</h2>
+                                <ul class="list-disc list-inside text-gray-700">
+                                    <li>Leadership</li>
+                                    <li>Project Management</li>
+                                    <li>Communication</li>
+                                    <li>Technical Skills</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-xl font-semibold text-blue-700 mb-4 border-b-2 border-blue-200 pb-2">Work Experience</h2>
+                        <div class="space-y-4 mb-8">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Job Title</h3>
+                                <p class="text-blue-600">Company Name | 2020 - Present</p>
+                                <p class="text-gray-700">Responsibilities and achievements in this role.</p>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-xl font-semibold text-blue-700 mb-4 border-b-2 border-blue-200 pb-2">Education</h2>
+                        <div class="space-y-2">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Degree Name</h3>
+                                <p class="text-blue-600">University Name | 2016 - 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-center space-x-4 mt-8">
+                    <button onclick="backToTemplates()" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Templates
+                    </button>
+                    <button class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        <i class="fas fa-download mr-2"></i>Download PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Next Step</h3>
+                    <p class="text-blue-200">Creating professional resumes that get you hired faster.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Features</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="#" class="hover:text-white">Resume Templates</a></li>
+                        <li><a href="#" class="hover:text-white">CV Builder</a></li>
+                        <li><a href="#" class="hover:text-white">Cover Letters</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Careers Advice</a></li>
+                        <li><a href="#" class="hover:text-white">Tutorials</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-800 mt-8 pt-8 text-center text-blue-200">
+                <p>&copy; 2024 Next Step Resume Builder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fixed bottom-8 right-8 floating-action">
+        <button class="w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
+            <i class="fas fa-plus text-xl"></i>
+        </button>
+    </div>
+
+    <script>
+        let currentSection = 'templates';
+        const backButton = document.getElementById('backButton');
+        
+        // Template selection functionality
+        function selectTemplate(templateId) {
+            document.getElementById('templateSection').classList.add('hidden');
+            document.getElementById('editorSection').classList.remove('hidden');
+            currentSection = 'editor';
+            updateBackButton();
+            
+            // Update progress bar
+            document.querySelector('.progress-bar').style.width = '50%';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        function backToTemplates() {
+            document.getElementById('editorSection').classList.add('hidden');
+            document.getElementById('templateSection').classList.remove('hidden');
+            currentSection = 'templates';
+            updateBackButton();
+            
+            // Reset progress bar
+            document.querySelector('.progress-bar').style.width = '0%';
+        }
+        
+        function goBack() {
+            if (currentSection === 'editor') {
+                backToTemplates();
+            }
+        }
+        
+        function updateBackButton() {
+            if (currentSection === 'editor') {
+                backButton.classList.add('visible');
+            } else {
+                backButton.classList.remove('visible');
+            }
+        }
+        
+        // Basic editor functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBackButton();
+            
+            // Initialize tooltips
+            const toolButtons = document.querySelectorAll('.tool-button');
+            toolButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Basic toolbar functionality
+                    this.classList.add('bg-blue-800');
+                    setTimeout(() => {
+                        this.classList.remove('bg-blue-800');
+                    }, 200);
+                });
+            });
+            
+            // Simulate loading progress
+            setTimeout(() => {
+                document.querySelector('.progress-bar').style.width = '100%';
+            }, 2000);
+        });
+        
+        // Auto-save functionality
+        setInterval(() => {
+            console.log('Auto-saving changes...');
+        }, 30000);
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+Z for undo
+            if (e.ctrlKey && e.key === 'z') {
+                e.preventDefault();
+                document.execCommand('undo');
+            }
+            // Ctrl+Y for redo
+            if (e.ctrlKey && e.key === 'y') {
+                e.preventDefault();
+                document.execCommand('redo');
+            }
+            // Escape key to go back
+            if (e.key === 'Escape') {
+                goBack();
+            }
+        });
+    </script>
+</body>
+</html>
+
