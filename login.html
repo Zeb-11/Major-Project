@@ -207,6 +207,12 @@
             
             .auth-form {
                 padding: 40px;
+                font-size: 2.2rem;
+                font-weight: 800;
+                color: #1e40af;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
             }
         }
     </style>
@@ -240,8 +246,9 @@
                         <div id="login-password-error" class="error-message"></div>
                     </div>
                     
+                    <!-- Signup Button  -->
                     <div class="form-group">
-                        <button type="submit" class="btn-primary".rel = "homepage" href = "home.html">Sign In</button>
+                        <button type="submit" class="btn-primary" onclick="location.href ='home.html'">Sign In</button> 
                     </div>
                 </form>
                 
@@ -294,7 +301,8 @@
                         <input type="password" id="signup-confirm-password" class="form-input" placeholder="Confirm password" required>
                         <div id="signup-confirm-password-error" class="error-message"></div>
                     </div>
-                    
+                
+
                     <div class="form-group">
                         <button type="submit" class="btn-primary">Sign Up</button>
                     </div>
@@ -326,6 +334,12 @@
         </div>
     </div>
     
+
+
+
+
+
+
     <script>
         function showSignupForm() {
             document.getElementById('login-form').classList.add('hidden');
@@ -380,10 +394,10 @@
                 document.getElementById('login-password-error').textContent = '';
             }
             
-            if (isValid) {
-                // Here you would typically send the data to your server
-                alert('Login successful! (This is a demo)');
-            }
+            // if (isValid) {
+            //     // Here you would typically send the data to your server
+            //     alert('Login successful! (This is a demo)');
+            // }
         });
         
         // Form validation for signup
@@ -449,10 +463,10 @@
         }
         
         // // Social login buttons (demo functionality)
-        // // document.querySelectorAll('.social-btn').forEach(button => {
-        // //     button.addEventListener('click', function() {
-        // //         const provider = this.textContent.trim();
-        // //         alert(`You clicked ${provider} login (This is a demo)`);
+        // document.querySelectorAll('.social-btn').forEach(button => {
+        //     button.addEventListener('click', function() {
+        //         const provider = this.textContent.trim();
+        //         alert(`You clicked ${provider} login (This is a demo)`);
         //     });
         // });
     </script>

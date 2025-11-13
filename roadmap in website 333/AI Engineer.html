@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Developer Roadmap - Interactive Tree Structure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Enhanced Tree Structure with Connecting Lines */
+        .tree-container {
+            position: relative;
+        }
+        
+        .tree-branch {
+            position: relative;
+            margin-left: 2rem;
+        }
+        
+        .tree-branch::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6, #ec4899);
+            opacity: 0.6;
+        }
+        
+        .tree-node {
+            position: relative;
+            margin: 1rem 0;
+        }
+        
+        .tree-node::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            width: 2rem;
+            height: 2px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            opacity: 0.6;
+        }
+        
+        .root-node {
+            margin-left: 0;
+        }
+        
+        .root-node::before {
+            display: none;
+        }
+        
+        /* Advanced Animations */
+        .expand-icon {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .expanded .expand-icon {
+            transform: rotate(90deg);
+        }
+        
+        .tree-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+        
+        .tree-content.expanded {
+            max-height: 2000px;
+            opacity: 1;
+        }
+        
+        /* Node Styling */
+        .node-card {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        
+        .node-card:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Progress Indicators */
+        .progress-ring {
+            transition: stroke-dasharray 0.5s ease-in-out;
+        }
+        
+        /* Skill Level Colors */
+        .skill-beginner { 
+            border-left: 4px solid #10b981; 
+            background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+        }
+        .skill-intermediate { 
+            border-left: 4px solid #f59e0b; 
+            background: linear-gradient(135deg, #fffbeb, #fefce8);
+        }
+        .skill-advanced { 
+            border-left: 4px solid #ef4444; 
+            background: linear-gradient(135deg, #fef2f2, #fef7f7);
+        }
+        .skill-expert { 
+            border-left: 4px solid #8b5cf6; 
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+        }
+        
+        /* Badge Animations */
+        .badge {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .tree-branch {
+                margin-left: 1rem;
+            }
+            .tree-branch::before {
+                left: -1rem;
+            }
+            .tree-node::before {
+                left: -1rem;
+                width: 1rem;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+        
+        /* Floating Elements */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header Section -->
+    <header class="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-16">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="relative container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-7xl font-bold mb-6 floating">
+                🚀 Complete Developer Roadmap
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                Interactive Tree Structure - Frontend | Full Stack | AI Engineer
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm">
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">🌳 Tree Structure</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">📱 Fully Responsive</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">✅ Progress Tracking</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">🎯 Skill Levels</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Roadmap Container -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Progress Dashboard -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-12 border border-gray-100">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">📊 Your Learning Progress</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 relative">
+                        <svg class="w-20 h-20 transform -rotate-90">
+                            <circle cx="40" cy="40" r="36" stroke="#e5e7eb" stroke-width="8" fill="transparent"/>
+                            <circle cx="40" cy="40" r="36" stroke="#3b82f6" stroke-width="8" fill="transparent"
+                                    stroke-dasharray="226" stroke-dashoffset="226" class="progress-ring" id="frontend-progress"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-lg font-bold text-blue-600" id="frontend-percent">0%</span>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Frontend</h3>
+                    <p class="text-sm text-gray-600" id="frontend-count">0/8 completed</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 relative">
+                        <svg class="w-20 h-20 transform -rotate-90">
+                            <circle cx="40" cy="40" r="36" stroke="#e5e7eb" stroke-width="8" fill="transparent"/>
+                            <circle cx="40" cy="40" r="36" stroke="#8b5cf6" stroke-width="8" fill="transparent"
+                                    stroke-dasharray="226" stroke-dashoffset="226" class="progress-ring" id="fullstack-progress"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-lg font-bold text-purple-600" id="fullstack-percent">0%</span>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Full Stack</h3>
+                    <p class="text-sm text-gray-600" id="fullstack-count">0/10 completed</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 relative">
+                        <svg class="w-20 h-20 transform -rotate-90">
+                            <circle cx="40" cy="40" r="36" stroke="#e5e7eb" stroke-width="8" fill="transparent"/>
+                            <circle cx="40" cy="40" r="36" stroke="#ec4899" stroke-width="8" fill="transparent"
+                                    stroke-dasharray="226" stroke-dashoffset="226" class="progress-ring" id="ai-progress"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-lg font-bold text-pink-600" id="ai-percent">0%</span>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">AI Engineer</h3>
+                    <p class="text-sm text-gray-600" id="ai-count">0/7 completed</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 relative">
+                        <svg class="w-20 h-20 transform -rotate-90">
+                            <circle cx="40" cy="40" r="36" stroke="#e5e7eb" stroke-width="8" fill="transparent"/>
+                            <circle cx="40" cy="40" r="36" stroke="#10b981" stroke-width="8" fill="transparent"
+                                    stroke-dasharray="226" stroke-dashoffset="226" class="progress-ring" id="overall-progress"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-lg font-bold text-green-600" id="overall-percent">0%</span>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Overall</h3>
+                    <p class="text-sm text-gray-600" id="overall-count">0/25 completed</p>
+                </div>
+            </div>
+            
+            <!-- Skill Level Indicator -->
+            <div class="text-center">
+                <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-3 rounded-full">
+                    <span class="text-2xl" id="skill-emoji">🌱</span>
+                    <span class="font-semibold text-gray-800">Current Level: </span>
+                    <span class="font-bold text-blue-600" id="current-skill-level">Beginner</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Tree Structure -->
+        <div class="tree-container">
+            <!-- Frontend Development Path -->
+            <div class="tree-node root-node mb-8">
+                <div class="node-card bg-white rounded-2xl shadow-lg p-6 cursor-pointer skill-beginner" onclick="toggleTreeNode('frontend-tree')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                <span class="text-3xl">🎨</span>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-gray-800">Frontend Development</h2>
+                                <p class="text-gray-600 text-lg">User Interface & Experience</p>
+                                <div class="flex items-center space-x-2 mt-2">
+                                    <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-semibold">Beginner Friendly</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-semibold">8 Topics</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expand-icon text-gray-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="frontend-tree" class="tree-content mt-6">
+                    <div class="tree-branch">
+                        <!-- HTML Fundamentals -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-beginner" onclick="toggleSubNode('html-subtree')">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🏗️</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">HTML5</h3>
+                                            <p class="text-gray-600">Structure & Semantics</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="updateProgress('frontend', this)">
+                                        <div class="expand-icon text-gray-400">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="html-subtree" class="tree-content mt-3 ml-6">
+                                <div class="space-y-3">
+                                    <div class="bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                        <h4 class="font-semibold text-gray-800 mb-2">📝 Core Concepts</h4>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            <li>• Semantic HTML5 elements</li>
+                                            <li>• Document structure & DOCTYPE</li>
+                                            <li>• Forms & input validation</li>
+                                            <li>• Accessibility (ARIA, alt text)</li>
+                                            <li>• SEO best practices</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CSS Styling -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-beginner" onclick="toggleSubNode('css-subtree')">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🎨</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">CSS3</h3>
+                                            <p class="text-gray-600">Styling & Layout</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="updateProgress('frontend', this)">
+                                        <div class="expand-icon text-gray-400">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="css-subtree" class="tree-content mt-3 ml-6">
+                                <div class="space-y-3">
+                                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                        <h4 class="font-semibold text-gray-800 mb-2">🎯 Layout Systems</h4>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            <li>• Flexbox & CSS Grid</li>
+                                            <li>• Responsive design principles</li>
+                                            <li>• CSS animations & transitions</li>
+                                            <li>• Preprocessors (Sass/Less)</li>
+                                            <li>• CSS-in-JS solutions</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- JavaScript -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate" onclick="toggleSubNode('js-subtree')">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">⚡</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">JavaScript</h3>
+                                            <p class="text-gray-600">Programming & Logic</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="updateProgress('frontend', this)">
+                                        <div class="expand-icon text-gray-400">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="js-subtree" class="tree-content mt-3 ml-6">
+                                <div class="space-y-3">
+                                    <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                                        <h4 class="font-semibold text-gray-800 mb-2">🚀 Modern JavaScript</h4>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            <li>• ES6+ features & syntax</li>
+                                            <li>• DOM manipulation & events</li>
+                                            <li>• Async/await & Promises</li>
+                                            <li>• Modules & bundlers</li>
+                                            <li>• TypeScript fundamentals</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- React Framework -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">⚛️</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">React.js</h3>
+                                            <p class="text-gray-600">Component Library</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="updateProgress('frontend', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vue.js -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🖖</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Vue.js</h3>
+                                            <p class="text-gray-600">Progressive Framework</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="updateProgress('frontend', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Build Tools -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🔧</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Build Tools</h3>
+                                            <p class="text-gray-600">Webpack, Vite, Parcel</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="updateProgress('frontend', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testing -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-advanced">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🧪</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Testing</h3>
+                                            <p class="text-gray-600">Jest, Cypress, RTL</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="updateProgress('frontend', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Performance -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-advanced">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">⚡</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Performance</h3>
+                                            <p class="text-gray-600">Optimization & PWA</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="updateProgress('frontend', this)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Stack Development Path -->
+            <div class="tree-node root-node mb-8">
+                <div class="node-card bg-white rounded-2xl shadow-lg p-6 cursor-pointer skill-intermediate" onclick="toggleTreeNode('fullstack-tree')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                <span class="text-3xl">🔗</span>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-gray-800">Full Stack Development</h2>
+                                <p class="text-gray-600 text-lg">Frontend + Backend + Database</p>
+                                <div class="flex items-center space-x-2 mt-2">
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full font-semibold">Intermediate</span>
+                                    <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full font-semibold">10 Topics</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expand-icon text-gray-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="fullstack-tree" class="tree-content mt-6">
+                    <div class="tree-branch">
+                        <!-- Node.js -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🟢</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Node.js</h3>
+                                            <p class="text-gray-600">Server-side JavaScript</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-purple-600 rounded" onchange="updateProgress('fullstack', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Express.js -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🚂</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Express.js</h3>
+                                            <p class="text-gray-600">Web Framework</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-purple-600 rounded" onchange="updateProgress('fullstack', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Databases -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate" onclick="toggleSubNode('database-subtree')">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🗄️</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Databases</h3>
+                                            <p class="text-gray-600">SQL & NoSQL</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" class="w-5 h-5 text-purple-600 rounded" onchange="updateProgress('fullstack', this)">
+                                        <div class="expand-icon text-gray-400">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="database-subtree" class="tree-content mt-3 ml-6">
+                                <div class="space-y-3">
+                                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                        <h4 class="font-semibold text-gray-800 mb-2">🐘 SQL Databases</h4>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            <li>• PostgreSQL, MySQL</li>
+                                            <li>• Database design & normalization</li>
+                                            <li>• Complex queries & joins</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                                        <h4 class="font-semibold text-gray-800 mb-2">🍃 NoSQL Databases</h4>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            <li>• MongoDB, Redis</li>
+                                            <li>• Document & key-value stores</li>
+                                            <li>• Scaling strategies</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- REST APIs -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🔌</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">REST APIs</h3>
+                                            <p class="text-gray-600">API Design & Development</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-purple-600 rounded" onchange="updateProgress('fullstack', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- GraphQL -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-advanced">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">📊</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">GraphQL</h3>
+                                            <p class="text-gray-600">Query Language</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-purple-600 rounded" onchange="updateProgress('fullstack', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Authentication -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🔐</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Authentication</h3>
+                                            <p class="text-gray-600">JWT, OAuth, Sessions</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-purple-600 rounded" onchange="updateProgress('fullstack', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cloud Services -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-advanced">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">☁️</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Cloud Services</h3>
+                                            <p class="text-gray-600">AWS, Azure, GCP</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-purple-600 rounded" onchange="updateProgress('fullstack', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Docker -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-advanced">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🐳</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Docker</h3>
+                                            <p class="text-gray-600">Containerization</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-purple-600 rounded" onchange="updateProgress('fullstack', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CI/CD -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-advanced">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🔄</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">CI/CD</h3>
+                                            <p class="text-gray-600">Deployment Pipelines</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-purple-600 rounded" onchange="updateProgress('fullstack', this)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Engineer Path -->
+            <div class="tree-node root-node mb-8">
+                <div class="node-card bg-white rounded-2xl shadow-lg p-6 cursor-pointer skill-expert" onclick="toggleTreeNode('ai-tree')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                <span class="text-3xl">🤖</span>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-gray-800">AI Engineer</h2>
+                                <p class="text-gray-600 text-lg">Machine Learning & AI Development</p>
+                                <div class="flex items-center space-x-2 mt-2">
+                                    <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full font-semibold">Expert Level</span>
+                                    <span class="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full font-semibold">7 Topics</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expand-icon text-gray-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="ai-tree" class="tree-content mt-6">
+                    <div class="tree-branch">
+                        <!-- Python -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-intermediate">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🐍</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Python</h3>
+                                            <p class="text-gray-600">Programming Foundation</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-pink-600 rounded" onchange="updateProgress('ai', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Machine Learning -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-advanced" onclick="toggleSubNode('ml-subtree')">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🧠</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Machine Learning</h3>
+                                            <p class="text-gray-600">Algorithms & Models</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" class="w-5 h-5 text-pink-600 rounded" onchange="updateProgress('ai', this)">
+                                        <div class="expand-icon text-gray-400">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="ml-subtree" class="tree-content mt-3 ml-6">
+                                <div class="space-y-3">
+                                    <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                                        <h4 class="font-semibold text-gray-800 mb-2">📊 Core Algorithms</h4>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            <li>• Supervised Learning (Classification, Regression)</li>
+                                            <li>• Unsupervised Learning (Clustering, PCA)</li>
+                                            <li>• Reinforcement Learning</li>
+                                            <li>• Ensemble Methods</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Deep Learning -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-expert">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">🔮</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Deep Learning</h3>
+                                            <p class="text-gray-600">Neural Networks</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-pink-600 rounded" onchange="updateProgress('ai', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NLP -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-expert">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">💬</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">NLP</h3>
+                                            <p class="text-gray-600">Natural Language Processing</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-pink-600 rounded" onchange="updateProgress('ai', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Computer Vision -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-expert">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">👁️</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">Computer Vision</h3>
+                                            <p class="text-gray-600">Image & Video Analysis</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-pink-600 rounded" onchange="updateProgress('ai', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MLOps -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-expert">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">⚙️</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">MLOps</h3>
+                                            <p class="text-gray-600">ML in Production</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-pink-600 rounded" onchange="updateProgress('ai', this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Ethics -->
+                        <div class="tree-node">
+                            <div class="node-card bg-white rounded-xl shadow-md p-5 skill-advanced">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <span class="text-2xl">⚖️</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800">AI Ethics</h3>
+                                            <p class="text-gray-600">Responsible AI</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" class="w-5 h-5 text-pink-600 rounded" onchange="updateProgress('ai', this)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Resources & Tips -->
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 mt-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">🎯 Learning Path Recommendations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl p-6 shadow-md">
+                    <h3 class="text-xl font-bold text-green-600 mb-4">🌱 Beginner Path</h3>
+                    <ol class="text-sm text-gray-600 space-y-2">
+                        <li>1. HTML5 fundamentals</li>
+                        <li>2. CSS3 & responsive design</li>
+                        <li>3. JavaScript basics</li>
+                        <li>4. Version control (Git)</li>
+                        <li>5. Build first projects</li>
+                    </ol>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-md">
+                    <h3 class="text-xl font-bold text-yellow-600 mb-4">🚀 Intermediate Path</h3>
+                    <ol class="text-sm text-gray-600 space-y-2">
+                        <li>1. Choose a framework (React/Vue)</li>
+                        <li>2. Learn backend basics (Node.js)</li>
+                        <li>3. Database fundamentals</li>
+                        <li>4. API development</li>
+                        <li>5. Full-stack projects</li>
+                    </ol>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-md">
+                    <h3 class="text-xl font-bold text-red-600 mb-4">⚡ Advanced Path</h3>
+                    <ol class="text-sm text-gray-600 space-y-2">
+                        <li>1. System design</li>
+                        <li>2. Cloud platforms</li>
+                        <li>3. DevOps & CI/CD</li>
+                        <li>4. Microservices</li>
+                        <li>5. AI/ML integration</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 space-y-3">
+        <button onclick="expandAllTrees()" class="bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-full shadow-lg transition-all duration-300" title="Expand All">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+        <button onclick="collapseAllTrees()" class="bg-purple-500 hover:bg-purple-600 text-white p-4 rounded-full shadow-lg transition-all duration-300" title="Collapse All">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Progress tracking
+        const progress = {
+            frontend: { completed: 0, total: 8 },
+            fullstack: { completed: 0, total: 10 },
+            ai: { completed: 0, total: 7 }
+        };
+
+        /**
+         * Toggle main tree sections
+         */
+        function toggleTreeNode(treeId) {
+            const tree = document.getElementById(treeId);
+            const parentCard = tree.previousElementSibling;
+            
+            if (tree.classList.contains('expanded')) {
+                tree.classList.remove('expanded');
+                parentCard.classList.remove('expanded');
+            } else {
+                tree.classList.add('expanded');
+                parentCard.classList.add('expanded');
+                
+                // Smooth scroll to show expanded content
+                setTimeout(() => {
+                    tree.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest' 
+                    });
+                }, 300);
+            }
+        }
+
+        /**
+         * Toggle sub-nodes within trees
+         */
+        function toggleSubNode(nodeId) {
+            const node = document.getElementById(nodeId);
+            const parentCard = node.previousElementSibling;
+            
+            if (node.classList.contains('expanded')) {
+                node.classList.remove('expanded');
+                parentCard.classList.remove('expanded');
+            } else {
+                node.classList.add('expanded');
+                parentCard.classList.add('expanded');
+            }
+        }
+
+        /**
+         * Update progress when checkboxes are clicked
+         */
+        function updateProgress(category, checkbox) {
+            if (checkbox.checked) {
+                progress[category].completed++;
+            } else {
+                progress[category].completed--;
+            }
+            
+            updateProgressDisplay();
+            updateSkillLevel();
+            saveProgress();
+        }
+
+        /**
+         * Update progress display with animations
+         */
+        function updateProgressDisplay() {
+            // Update individual category progress
+            Object.keys(progress).forEach(category => {
+                const completed = progress[category].completed;
+                const total = progress[category].total;
+                const percentage = Math.round((completed / total) * 100);
+                
+                // Update progress ring
+                const progressRing = document.getElementById(`${category}-progress`);
+                const circumference = 2 * Math.PI * 36;
+                const strokeDashoffset = circumference - (percentage / 100) * circumference;
+                progressRing.style.strokeDashoffset = strokeDashoffset;
+                
+                // Update text
+                document.getElementById(`${category}-percent`).textContent = `${percentage}%`;
+                document.getElementById(`${category}-count`).textContent = `${completed}/${total} completed`;
+            });
+            
+            // Update overall progress
+            const totalCompleted = Object.values(progress).reduce((sum, cat) => sum + cat.completed, 0);
+            const totalItems = Object.values(progress).reduce((sum, cat) => sum + cat.total, 0);
+            const overallPercentage = Math.round((totalCompleted / totalItems) * 100);
+            
+            const overallRing = document.getElementById('overall-progress');
+            const circumference = 2 * Math.PI * 36;
+            const strokeDashoffset = circumference - (overallPercentage / 100) * circumference;
+            overallRing.style.strokeDashoffset = strokeDashoffset;
+            
+            document.getElementById('overall-percent').textContent = `${overallPercentage}%`;
+            document.getElementById('overall-count').textContent = `${totalCompleted}/${totalItems} completed`;
+        }
+
+        /**
+         * Update skill level based on overall progress
+         */
+        function updateSkillLevel() {
+            const totalCompleted = Object.values(progress).reduce((sum, cat) => sum + cat.completed, 0);
+            const totalItems = Object.values(progress).reduce((sum, cat) => sum + cat.total, 0);
+            const percentage = (totalCompleted / totalItems) * 100;
+            
+            const skillLevelElement = document.getElementById('current-skill-level');
+            const skillEmojiElement = document.getElementById('skill-emoji');
+            
+            if (percentage < 25) {
+                skillLevelElement.textContent = 'Beginner';
+                skillLevelElement.className = 'font-bold text-green-600';
+                skillEmojiElement.textContent = '🌱';
+            } else if (percentage < 50) {
+                skillLevelElement.textContent = 'Intermediate';
+                skillLevelElement.className = 'font-bold text-yellow-600';
+                skillEmojiElement.textContent = '🚀';
+            } else if (percentage < 75) {
+                skillLevelElement.textContent = 'Advanced';
+                skillLevelElement.className = 'font-bold text-red-600';
+                skillEmojiElement.textContent = '⚡';
+            } else {
+                skillLevelElement.textContent = 'Expert';
+                skillLevelElement.className = 'font-bold text-purple-600';
+                skillEmojiElement.textContent = '🏆';
+            }
+            
+            // Show celebration for milestones
+            if (percentage === 100) {
+                showCelebration();
+            }
+        }
+
+        /**
+         * Show celebration animation
+         */
+        function showCelebration() {
+            const celebration = document.createElement('div');
+            celebration.className = 'fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50';
+            celebration.innerHTML = `
+                <div class="bg-white rounded-2xl p-8 text-center shadow-2xl transform animate-bounce">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Congratulations!</h2>
+                    <p class="text-gray-600 mb-4">You've completed the entire roadmap!</p>
+                    <button onclick="this.parentElement.parentElement.remove()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                        Awesome! 🚀
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(celebration);
+            
+            // Create confetti
+            createConfetti();
+        }
+
+        /**
+         * Create confetti animation
+         */
+        function createConfetti() {
+            const colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#10b981', '#f59e0b', '#ef4444'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    top: -10px;
+                    left: ${Math.random() * 100}%;
+                    width: 8px;
+                    height: 8px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    z-index: 1000;
+                    animation: confetti-fall 3s linear forwards;
+                    transform: rotate(${Math.random() * 360}deg);
+                `;
+                
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // Add confetti animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confetti-fall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        /**
+         * Expand all tree sections
+         */
+        function expandAllTrees() {
+            document.querySelectorAll('.tree-content').forEach(tree => {
+                tree.classList.add('expanded');
+                tree.previousElementSibling.classList.add('expanded');
+            });
+        }
+
+        /**
+         * Collapse all tree sections
+         */
+        function collapseAllTrees() {
+            document.querySelectorAll('.tree-content').forEach(tree => {
+                tree.classList.remove('expanded');
+                tree.previousElementSibling.classList.remove('expanded');
+            });
+        }
+
+        /**
+         * Save progress to localStorage
+         */
+        function saveProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checkedStates = Array.from(checkboxes).map(cb => cb.checked);
+            localStorage.setItem('roadmap-progress', JSON.stringify({
+                checkboxes: checkedStates,
+                progress: progress
+            }));
+        }
+
+        /**
+         * Load progress from localStorage
+         */
+        function loadProgress() {
+            const saved = localStorage.getItem('roadmap-progress');
+            if (saved) {
+                const data = JSON.parse(saved);
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                
+                data.checkboxes.forEach((checked, index) => {
+                    if (checkboxes[index]) {
+                        checkboxes[index].checked = checked;
+                    }
+                });
+                
+                Object.assign(progress, data.progress);
+                updateProgressDisplay();
+                updateSkillLevel();
+            }
+        }
+
+        /**
+         * Keyboard shortcuts
+         */
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                collapseAllTrees();
+            } else if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+                e.preventDefault();
+                expandAllTrees();
+            }
+        });
+
+        /**
+         * Initialize the application
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            updateProgressDisplay();
+            updateSkillLevel();
+            
+            // Add smooth scrolling for better UX
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            console.log('🚀 Developer Roadmap loaded successfully!');
+            console.log('💡 Keyboard shortcuts: ESC (collapse all), Ctrl/Cmd+A (expand all)');
+        });
+
+        // Auto-save progress periodically
+        setInterval(saveProgress, 30000); // Save every 30 seconds
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b7ab7c046d8599',t:'MTc1NDU3OTEwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

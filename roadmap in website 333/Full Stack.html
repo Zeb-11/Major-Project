@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend & Full Stack Developer Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tree structure styling with connecting lines */
+        .tree-line {
+            position: relative;
+        }
+        .tree-line::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        }
+        .tree-node {
+            position: relative;
+            margin-left: 40px;
+        }
+        .tree-node::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 20px;
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        }
+        .root-node {
+            margin-left: 8rem;
+            margin-right: 8rem;
+        }
+        .root-node::before {
+            display: none;
+        }
+        
+        /* Smooth animations for expand/collapse */
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+        .expanded .expand-icon {
+            transform: rotate(90deg);
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px); 
+                max-height: 0;
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 3000px;
+            }
+        }
+        
+        .collapsing {
+            animation: fadeOut 0.3s ease-in-out;
+        }
+        @keyframes fadeOut {
+            from { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 3000px;
+            }
+            to { 
+                opacity: 0; 
+                transform: translateY(-10px);
+                max-height: 0;
+            }
+        }
+        
+        /* Hover effects for cards */
+        .roadmap-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Progress bar animation */
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        
+        /* Skill level indicators */
+        .skill-beginner { border-left-color: #10b981; }
+        .skill-intermediate { border-left-color: #f59e0b; }
+        .skill-advanced { border-left-color: #ef4444; }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .tree-node {
+                margin-left: 20px;
+            }
+            .tree-node::before {
+                left: -10px;
+                width: 10px;
+            }
+            .tree-line::before {
+                left: 10px;
+            }
+        }
+        
+        /* Floating action buttons */
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 4rem;
+}
+        
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header Section -->
+    <header class="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-16">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="relative container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-7xl font-bold mb-6 floating">
+                🚀 Frontend & Full Stack Developer Roadmap
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                Interactive Tree Structure - Frontend | Full Stack | AI Engineer
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm">
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">🌳 Tree Structure</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">📱 Fully Responsive</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">✅ Progress Tracking</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">🎯 Skill Levels</span>
+            </div>
+        </div>
+    
+
+<body class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 min-h-screen py-8">
+    <div class="container mx-auto px-4 max-w-7xl">
+        <!-- Header Section 
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+                Frontend & Full Stack Developer Roadmap
+            </h1>
+            <p class="text-gray-600 text-lg md:text-xl max-w-4xl mx-auto mb-6">
+                Complete learning path from beginner to expert - HTML to Advanced Full Stack Development
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+                <span class="bg-white px-3 py-1 rounded-full shadow-sm">🖱️ Expand sections by clicking</span>
+                <span class="bg-white px-3 py-1 rounded-full shadow-sm">📱 Mobile friendly</span>
+                <span class="bg-white px-3 py-1 rounded-full shadow-sm">⌨️ collapse everything by pressing ESC</span>
+            </div>
+            
+            <!-- Learning Path Indicators 
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                <div class="bg-white rounded-lg p-4 shadow-md border-l-4 border-green-500">
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-3">🌱</span>
+                        <div>
+                            <h3 class="font-semibold text-green-700">Beginner</h3>
+                            <p class="text-sm text-gray-600">HTML, CSS, JavaScript basics</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-4 shadow-md border-l-4 border-yellow-500">
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-3">🚀</span>
+                        <div>
+                            <h3 class="font-semibold text-yellow-700">Intermediate</h3>
+                            <p class="text-sm text-gray-600">Frameworks, APIs, Tools</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-4 shadow-md border-l-4 border-red-500">
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-3">⚡</span>
+                        <div>
+                            <h3 class="font-semibold text-red-700">Advanced</h3>
+                            <p class="text-sm text-gray-600">Full Stack, DevOps, Architecture</p>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+              -->
+        </header>
+        <body class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 min-h-screen py-8">
+    <div class="container mx-auto px-4 max-w-7xl">
+
+        <!-- Frontend & Full Stack Roadmap Tree Structure -->
+        <main class="roadmap-tree">
+            <!-- HTML Fundamentals -->
+            <ul class="space-y-6">
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-beginner" onclick="toggleNode('html-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🏗️</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">HTML</h2>
+                                    <p class="text-gray-600">Structure & Foundation</p>
+                                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">Beginner</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="html-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📝</span> HTML Basics
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• HTML5 semantic elements</li>
+                                    <li>• Document structure</li>
+                                    <li>• Tags, attributes, elements</li>
+                                    <li>• Headings, paragraphs, lists</li>
+                                    <li>• Links && navigation</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📋</span> Forms & Input
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Form elements</li>
+                                    <li>• Input types</li>
+                                    <li>• Validation attributes</li>
+                                    <li>• Form submission</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🖼️</span> Media & Graphics
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Images & optimization</li>
+                                    <li>• Audio & video</li>
+                                    <li>• SVG basics</li>
+                                    <li>• Canvas element</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">♿</span> Accessibility
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• ARIA attributes</li>
+                                    <li>• Semantic HTML</li>
+                                    <li>• Screen reader support</li>
+                                    <li>• Keyboard navigation</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- CSS Styling -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-beginner" onclick="toggleNode('css-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🎨</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">CSS</h2>
+                                    <p class="text-gray-600">Styling & Design</p>
+                                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">Beginner</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="css-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🎯</span> CSS Fundamentals
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Selectors & specificity</li>
+                                    <li>• Box model</li>
+                                    <li>• Colors & typography</li>
+                                    <li>• Units & measurements</li>
+                                    <li>• Cascade & inheritance</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📐</span> Layout Systems
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Flexbox layout</li>
+                                    <li>• CSS Grid</li>
+                                    <li>• Positioning</li>
+                                    <li>• Float & clear</li>
+                                    <li>• Display properties</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">📱</span> Responsive Design
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Media queries</li>
+                                    <li>• Mobile-first approach</li>
+                                    <li>• Viewport meta tag</li>
+                                    <li>• Responsive images</li>
+                                    <li>• Breakpoints</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">✨</span> Advanced CSS
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Animations & transitions</li>
+                                    <li>• Transform properties</li>
+                                    <li>• CSS variables</li>
+                                    <li>• Pseudo-classes/elements</li>
+                                    <li>• CSS preprocessors (Sass/Less)</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- JavaScript Programming -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('js-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">⚡</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">JavaScript</h2>
+                                    <p class="text-gray-600">Programming और Interactivity</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="js-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔤</span> JavaScript Basics
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Variables & data types</li>
+                                    <li>• Functions &scope</li>
+                                    <li>• Control structures</li>
+                                    <li>• Arrays & objects</li>
+                                    <li>• Error handling</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🌐</span> DOM Manipulation
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• DOM selection</li>
+                                    <li>• Event handling</li>
+                                    <li>• Element manipulation</li>
+                                    <li>• Form validation</li>
+                                    <li>• Dynamic content</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔄</span> Asynchronous JavaScript
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Promises & async/await</li>
+                                    <li>• Fetch API</li>
+                                    <li>• AJAX requests</li>
+                                    <li>• Callbacks</li>
+                                    <li>• Event loop</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🚀</span> Modern JavaScript
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• ES6+ features</li>
+                                    <li>• Modules & imports</li>
+                                    <li>• Destructuring</li>
+                                    <li>• Arrow functions</li>
+                                    <li>• Template literals</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Version Control -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-beginner" onclick="toggleNode('git-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🔀</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Version Control</h2>
+                                    <p class="text-gray-600">Git & Collaboration</p>
+                                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">Beginner</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="git-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🐙</span> Git Basics
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Repository initialization</li>
+                                    <li>• Add, commit, push</li>
+                                    <li>• Branching & merging</li>
+                                    <li>• Status & log</li>
+                                    <li>• Remote repositories</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🐱</span> GitHub/GitLab
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Pull requests</li>
+                                    <li>• Issues & project management</li>
+                                    <li>• GitHub Actions</li>
+                                    <li>• Collaboration workflows</li>
+                                    <li>• Open source contribution</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Frontend Frameworks -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('frameworks-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">⚛️</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Frontend Frameworks</h2>
+                                    <p class="text-gray-600">Modern UI Libraries</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="frameworks-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-green-50 rounded-lg p-4 border border-green-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">⚛️</span> React.js
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Components & JSX</li>
+                                    <li>• State & props</li>
+                                    <li>• Hooks (useState, useEffect)</li>
+                                    <li>• Context API</li>
+                                    <li>• React Router</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-green-50 rounded-lg p-4 border border-green-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🖖</span> Vue.js
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Vue instance & directives</li>
+                                    <li>• Components & props</li>
+                                    <li>• Vuex state management</li>
+                                    <li>• Vue Router</li>
+                                    <li>• Composition API</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-green-50 rounded-lg p-4 border border-green-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🅰️</span> Angular
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Components & modules</li>
+                                    <li>• Services &dependency injection</li>
+                                    <li>• RxJS & observables</li>
+                                    <li>• Angular CLI</li>
+                                    <li>• TypeScript integration</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- CSS Frameworks -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('css-frameworks-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🎨</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">CSS Frameworks</h2>
+                                    <p class="text-gray-600">UI Component Libraries</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="css-frameworks-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🌊</span> Tailwind CSS
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Utility-first approach</li>
+                                    <li>• Responsive design</li>
+                                    <li>• Custom configuration</li>
+                                    <li>• Component extraction</li>
+                                    <li>• JIT compilation</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🅱️</span> Bootstrap
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Grid system</li>
+                                    <li>• Components</li>
+                                    <li>• Utilities</li>
+                                    <li>• JavaScript plugins</li>
+                                    <li>• Customization</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🎯</span> Material UI / Ant Design
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Pre-built components</li>
+                                    <li>• Design systems</li>
+                                    <li>• Theming</li>
+                                    <li>• Accessibility</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Backend Development -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-advanced" onclick="toggleNode('backend-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🖥️</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Backend Development</h2>
+                                    <p class="text-gray-600">Server-side Programming</p>
+                                    <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full mt-1">Advanced</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="backend-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🟢</span> Node.js
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Express.js framework</li>
+                                    <li>• NPM & package management</li>
+                                    <li>• Middleware</li>
+                                    <li>• RESTful APIs</li>
+                                    <li>• Authentication</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🐍</span> Python
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Django/Flask frameworks</li>
+                                    <li>• REST APIs</li>
+                                    <li>• Database integration</li>
+                                    <li>• Authentication systems</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">☕</span> Java
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Spring Boot</li>
+                                    <li>• Spring Security</li>
+                                    <li>• JPA/Hibernate</li>
+                                    <li>• Microservices</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-red-50 rounded-lg p-4 border border-red-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔷</span> C# / .NET
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• ASP.NET Core</li>
+                                    <li>• Entity Framework</li>
+                                    <li>• Web APIs</li>
+                                    <li>• Azure integration</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Databases -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('database-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🗄️</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Databases</h2>
+                                    <p class="text-gray-600">Data Storage & Management</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="database-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-teal-50 rounded-lg p-4 border border-teal-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🐘</span> SQL Databases
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• PostgreSQL</li>
+                                    <li>• MySQL</li>
+                                    <li>• SQL queries & joins</li>
+                                    <li>• Database design</li>
+                                    <li>• Indexing & optimization</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-teal-50 rounded-lg p-4 border border-teal-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🍃</span> NoSQL Databases
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• MongoDB</li>
+                                    <li>• Redis (caching)</li>
+                                    <li>• Document databases</li>
+                                    <li>• Key-value stores</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-teal-50 rounded-lg p-4 border border-teal-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔗</span> ORMs
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Sequelize (Node.js)</li>
+                                    <li>• Mongoose (MongoDB)</li>
+                                    <li>• Prisma</li>
+                                    <li>• TypeORM</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- DevOps & Deployment -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-advanced" onclick="toggleNode('devops-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🚀</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">DevOps & Deployment</h2>
+                                    <p class="text-gray-600">Production & Scaling</p>
+                                    <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full mt-1">Advanced</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="devops-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-pink-50 rounded-lg p-4 border border-pink-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">☁️</span> Cloud Platforms
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• AWS (EC2, S3, Lambda)</li>
+                                    <li>• Google Cloud Platform</li>
+                                    <li>• Microsoft Azure</li>
+                                    <li>• Vercel, Netlify</li>
+                                    <li>• Heroku</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-pink-50 rounded-lg p-4 border border-pink-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🐳</span> Containerization
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Docker basics</li>
+                                    <li>• Docker Compose</li>
+                                    <li>• Kubernetes</li>
+                                    <li>• Container registries</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-pink-50 rounded-lg p-4 border border-pink-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔄</span> CI/CD
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• GitHub Actions</li>
+                                    <li>• Jenkins</li>
+                                    <li>• GitLab CI</li>
+                                    <li>• Automated testing</li>
+                                    <li>• Deployment pipelines</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Testing -->
+                <li class="tree-node root-node">
+                    <div class="roadmap-card bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 border-l-4 skill-intermediate" onclick="toggleNode('testing-section')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-3xl">🧪</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Testing</h2>
+                                    <p class="text-gray-600">Quality Assurance</p>
+                                    <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full mt-1">Intermediate</span>
+                                </div>
+                            </div>
+                            <div class="expand-icon text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul id="testing-section" class="tree-line hidden mt-4 space-y-3">
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">⚡</span> Unit Testing
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Jest (JavaScript)</li>
+                                    <li>• React Testing Library</li>
+                                    <li>• Mocha/Chai</li>
+                                    <li>• Test-driven development</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="tree-node">
+                            <div class="roadmap-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                    <span class="mr-2">🔍</span> E2E Testing
+                                </h3>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Cypress</li>
+                                    <li>• Playwright</li>
+                                    <li>• Selenium</li>
+                                    <li>• Puppeteer</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </main>
+
+        <!-- Progress & Learning Path Footer -->
+        <footer class="mt-16 text-center">
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-5xl mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">🎯 Your Development Journey</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600" id="explored-count">0</div>
+                        <div class="text-sm text-gray-600">Explored Topics</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600" id="total-count">10</div>
+                        <div class="text-sm text-gray-600">Total Sections</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-green-50 to-teal-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600" id="progress-percent">0%</div>
+                        <div class="text-sm text-gray-600">Progress</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-yellow-600" id="skill-level">Beginner</div>
+                        <div class="text-sm text-gray-600">Current Level</div>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
+                    <div id="progress-bar" class="progress-bar bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-4 rounded-full" style="width: 0%"></div>
+                </div>
+                
+                <!-- Learning Path Guide -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-semibold text-green-700 mb-2">🌱 Beginner Path</h4>
+                        <p class="text-sm text-gray-600">HTML → CSS → JavaScript → Git</p>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-semibold text-yellow-700 mb-2">🚀 Intermediate Path</h4>
+                        <p class="text-sm text-gray-600">Frameworks → CSS Libraries → Databases</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-semibold text-red-700 mb-2">⚡ Advanced Path</h4>
+                        <p class="text-sm text-gray-600">Backend → DevOps → Testing → Architecture</p>
+                    </div>
+                </div>
+                
+                <p class="text-gray-600 text-sm mb-4">
+                    💡 <strong>Suggestion</strong> First build a strong foundation of HTML, CSS, JavaScript. Then choose a framework and start building projects.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-2 text-xs">
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Frontend First</span>
+                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded">Practice Projects</span>
+                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded">Build Portfolio</span>
+                    <span class="bg-pink-100 text-pink-800 px-2 py-1 rounded">Full Stack Journey</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab">
+        <button onclick="collapseAllSections()" class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg mb-3 block transition-all duration-300" title="Collapse All">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </svg>
+        </button>
+        <button onclick="expandAllSections()" class="bg-purple-500 hover:bg-purple-600 text-white p-3 rounded-full shadow-lg block transition-all duration-300" title="Expand All">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Track expanded sections for progress monitoring
+        let expandedSections = new Set();
+        
+        /**
+         * Toggle visibility of roadmap sections with smooth animations
+         * @param {string} sectionId - The ID of the section to toggle
+         */
+        function toggleNode(sectionId) {
+            const section = document.getElementById(sectionId);
+            const parentCard = section.previousElementSibling;
+            
+            if (section.classList.contains('hidden')) {
+                // Expand section with animation
+                section.classList.remove('hidden');
+                section.classList.add('fade-in');
+                parentCard.classList.add('expanded');
+                expandedSections.add(sectionId);
+                
+                // Smooth scroll to show expanded content
+                setTimeout(() => {
+                    section.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest',
+                        inline: 'nearest'
+                    });
+                }, 200);
+            } else {
+                // Collapse section with animation
+                section.classList.add('collapsing');
+                setTimeout(() => {
+                    section.classList.add('hidden');
+                    section.classList.remove('fade-in', 'collapsing');
+                    parentCard.classList.remove('expanded');
+                    expandedSections.delete(sectionId);
+                    updateProgress();
+                }, 300);
+            }
+            
+            updateProgress();
+        }
+        
+        /**
+         * Update progress statistics and visual indicators
+         */
+        function updateProgress() {
+            const totalSections = document.querySelectorAll('[id$="-section"]').length;
+            const exploredCount = expandedSections.size;
+            const progressPercent = Math.round((exploredCount / totalSections) * 100);
+            
+            // Update counter elements
+            document.getElementById('explored-count').textContent = exploredCount;
+            document.getElementById('total-count').textContent = totalSections;
+            document.getElementById('progress-percent').textContent = progressPercent + '%';
+            
+            // Update skill level based on progress
+            const skillLevelElement = document.getElementById('skill-level');
+            if (progressPercent < 30) {
+                skillLevelElement.textContent = 'Beginner';
+                skillLevelElement.className = 'text-2xl font-bold text-green-600';
+            } else if (progressPercent < 70) {
+                skillLevelElement.textContent = 'Intermediate';
+                skillLevelElement.className = 'text-2xl font-bold text-yellow-600';
+            } else {
+                skillLevelElement.textContent = 'Advanced';
+                skillLevelElement.className = 'text-2xl font-bold text-red-600';
+            }
+            
+            // Update progress bar
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = progressPercent + '%';
+            
+            // Add completion celebration
+            if (progressPercent === 100) {
+                showCompletionMessage();
+            }
+        }
+        
+        /**
+         * Show completion celebration message
+         */
+        function showCompletionMessage() {
+            const celebration = document.createElement('div');
+            celebration.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-lg shadow-xl z-50 animate-bounce';
+            celebration.innerHTML = '🎉 Congratulations! You have explored all the topics 🚀';
+            document.body.appendChild(celebration);
+            
+            // Add confetti effect
+            createConfetti();
+            
+            setTimeout(() => {
+                celebration.remove();
+            }, 5000);
+        }
+        
+        /**
+         * Create confetti animation
+         */
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    top: -10px;
+                    left: ${Math.random() * 100}%;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    z-index: 1000;
+                    animation: confetti-fall 3s linear forwards;
+                    transform: rotate(${Math.random() * 360}deg);
+                `;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+        
+        // Add confetti animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confetti-fall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        /**
+         * Collapse all expanded sections
+         */
+        function collapseAllSections() {
+            document.querySelectorAll('.tree-line:not(.hidden)').forEach(section => {
+                section.classList.add('collapsing');
+                setTimeout(() => {
+                    section.classList.add('hidden');
+                    section.classList.remove('fade-in', 'collapsing');
+                    section.previousElementSibling.classList.remove('expanded');
+                }, 300);
+            });
+            expandedSections.clear();
+            updateProgress();
+        }
+        
+        /**
+         * Expand all sections
+         */
+        function expandAllSections() {
+            document.querySelectorAll('.tree-line.hidden').forEach(section => {
+                section.classList.remove('hidden');
+                section.classList.add('fade-in');
+                section.previousElementSibling.classList.add('expanded');
+                expandedSections.add(section.id);
+            });
+            updateProgress();
+        }
+        
+        /**
+         * Enhanced hover effects for interactive cards
+         */
+        function initializeHoverEffects() {
+            document.querySelectorAll('.roadmap-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('cursor-pointer')) return;
+                    this.style.transform = 'translateY(-4px) scale(1.02)';
+                    this.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '';
+                });
+            });
+        }
+        
+        /**
+         * Keyboard navigation and shortcuts
+         */
+        function initializeKeyboardNavigation() {
+            document.addEventListener('keydown', function(e) {
+                switch(e.key) {
+                    case 'Escape':
+                        collapseAllSections();
+                        break;
+                        
+                    case 'Enter':
+                        if (document.activeElement.classList.contains('roadmap-card')) {
+                            const onclick = document.activeElement.getAttribute('onclick');
+                            if (onclick) {
+                                eval(onclick);
+                            }
+                        }
+                        break;
+                        
+                    case ' ':
+                        if (document.activeElement.classList.contains('roadmap-card')) {
+                            e.preventDefault();
+                            const onclick = document.activeElement.getAttribute('onclick');
+                            if (onclick) {
+                                eval(onclick);
+                            }
+                        }
+                        break;
+                        
+                    case 'a':
+                    case 'A':
+                        if (e.ctrlKey || e.metaKey) {
+                            e.preventDefault();
+                            expandAllSections();
+                        }
+                        break;
+                }
+            });
+        }
+        
+        /**
+         * Add accessibility features and ARIA labels
+         */
+        function initializeAccessibility() {
+            document.querySelectorAll('[onclick^="toggleNode"]').forEach(card => {
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-expanded', 'false');
+                card.setAttribute('aria-label', 'Click to expand or collapse this section');
+                
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            const isExpanded = card.classList.contains('expanded');
+                            card.setAttribute('aria-expanded', isExpanded.toString());
+                        }
+                    });
+                });
+                
+                observer.observe(card, { attributes: true });
+            });
+        }
+        
+        /**
+         * Initialize responsive behavior for mobile devices
+         */
+        function initializeResponsiveFeatures() {
+            const isMobile = window.innerWidth < 768;
+            
+            if (isMobile) {
+                document.querySelectorAll('.roadmap-card').forEach(card => {
+                    card.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.98)';
+                    });
+                    
+                    card.addEventListener('touchend', function() {
+                        this.style.transform = 'scale(1)';
+                    });
+                });
+                
+                document.querySelectorAll('[onclick^="toggleNode"]').forEach(card => {
+                    card.addEventListener('click', function() {
+                        setTimeout(() => {
+                            this.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'center' 
+                            });
+                        }, 400);
+                    });
+                });
+            }
+        }
+        
+        /**
+         * Add learning path recommendations
+         */
+        function showLearningPath() {
+            const paths = {
+                beginner: ['html-section', 'css-section', 'js-section', 'git-section'],
+                intermediate: ['frameworks-section', 'css-frameworks-section', 'database-section', 'testing-section'],
+                advanced: ['backend-section', 'devops-section']
+            };
+            
+            // This could be expanded to show recommended learning sequences
+            console.log('Learning paths available:', paths);
+        }
+        
+        /**
+         * Initialize all interactive features when DOM is loaded
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeHoverEffects();
+            initializeKeyboardNavigation();
+            initializeAccessibility();
+            initializeResponsiveFeatures();
+            updateProgress();
+            showLearningPath();
+            
+            // Add welcome message
+            console.log('🚀 Frontend & Full Stack Developer Roadmap loaded!');
+            console.log('💡 Keyboard shortcuts:');
+            console.log('   - ESC: Collapse all sections');
+            console.log('   - Ctrl/Cmd + A: Expand all sections');
+            console.log('   - Enter/Space: Toggle focused section');
+            console.log('   - Tab: Navigate between sections');
+        });
+        
+        /**
+         * Handle window resize for responsive adjustments
+         */
+        window.addEventListener('resize', function() {
+            initializeResponsiveFeatures();
+        });
+        
+        /**
+         * Add performance monitoring
+         */
+        function monitorPerformance() {
+            if ('performance' in window) {
+                const observer = new PerformanceObserver((list) => {
+                    for (const entry of list.getEntries()) {
+                        if (entry.duration > 16) {
+                            console.warn('Slow animation detected:', entry);
+                        }
+                    }
+                });
+                observer.observe({entryTypes: ['measure']});
+            }
+        }
+        
+        // Initialize performance monitoring
+        monitorPerformance();
+        
+        /**
+         * Add local storage for progress tracking
+         */
+        function saveProgress() {
+            localStorage.setItem('roadmap-progress', JSON.stringify([...expandedSections]));
+        }
+        
+        function loadProgress() {
+            const saved = localStorage.getItem('roadmap-progress');
+            if (saved) {
+                const sections = JSON.parse(saved);
+                sections.forEach(sectionId => {
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        section.classList.remove('hidden');
+                        section.classList.add('fade-in');
+                        section.previousElementSibling.classList.add('expanded');
+                        expandedSections.add(sectionId);
+                    }
+                });
+                updateProgress();
+            }
+        }
+        
+        // Save progress when sections are toggled
+        const originalToggleNode = toggleNode;
+        toggleNode = function(sectionId) {
+            originalToggleNode(sectionId);
+            saveProgress();
+        };
+        
+        // Load progress on page load
+        window.addEventListener('load', loadProgress);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b78f3c933d84c2',t:'MTc1NDU3Nzk0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
