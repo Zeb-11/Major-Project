@@ -6,6 +6,30 @@
     <title>NextStep - Find Your Dream Job</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+<!-- Firebase Authentication -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+
+    <script>
+  const firebaseConfig = { /* Your config object */ };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+</script>
+        <script>
+  function handleGoogleLogin() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(result => {
+        alert('Welcome, ' + result.user.email);
+      })
+      .catch(error => {
+        alert('Login failed: ' + error.message);
+      });
+  }
+</script>
+
+        <button onclick="handleGoogleLogin()">Sign in with Google</button>
     <style>
         :root {
             --primary-blue: #2563eb;
@@ -313,18 +337,20 @@
                 </div>
                 
                 <div class="social-login">
-                    <button class="social-btn">
-                        <img src="https://www.google.com/favicon.ico" alt="Google icon" class="social-icon">
-                        Google
-                    </button>
-                    <button class="social-btn">
-                        <img src="https://www.facebook.com/favicon.ico" alt="Facebook icon" class="social-icon">
-                        Facebook
-                    </button>
-                    <button class="social-btn">
-                        <img src="https://github.com/favicon.ico" alt="GitHub icon" class="social-icon">
-                        GitHub
-                    </button>
+                    <button class="social-btn" onclick="handleGoogleLogin()">
+                   <img src="https://www.google.com/favicon.ico" alt="Google icon" class="social-icon">
+                   Google
+                </button>
+
+                   <button class="social-btn" onclick="handleFacebookLogin()">
+                   <img src="https://www.facebook.com/favicon.ico" alt="Facebook icon" class="social-icon">
+                  Facebook
+                </button>
+
+                    <button class="social-btn" onclick="handleGithubLogin()">
+                   <img src="https://github.com/favicon.ico" alt="GitHub icon" class="social-icon">
+                   GitHub
+                </button>
                 </div>
                 
                 <div class="form-footer">
@@ -455,13 +481,37 @@
                 // Here you would typically send the data to your server
                 alert('Account created successfully! (This is a demo)');
             }
-        });
+         });
         
-        function isValidEmail(email) {
+         function isValidEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(email);
-        }
+         }
         
+            // Google
+         function handleGoogleLogin() {
+         const provider = new firebase.auth.GoogleAuthProvider();
+         auth.signInWithPopup(provider)
+         .then(result => { alert('Welcome, ' + result.user.email); })
+         .catch(error => { alert('Login failed: ' + error.message); });
+         }
+
+            // Facebook
+         function handleFacebookLogin() {
+         const provider = new firebase.auth.FacebookAuthProvider();
+         auth.signInWithPopup(provider)
+         .then(result => { alert('Welcome, ' + result.user.email); })
+         .catch(error => { alert('Login failed: ' + error.message); });
+         }
+
+           // GitHub
+         function handleGithubLogin() {
+         const provider = new firebase.auth.GithubAuthProvider();
+         auth.signInWithPopup(provider)
+         .then(result => { alert('Welcome, ' + result.user.email); })
+         .catch(error => { alert('Login failed: ' + error.message); });
+        }
+
         // // Social login buttons (demo functionality)
         // document.querySelectorAll('.social-btn').forEach(button => {
         //     button.addEventListener('click', function() {
