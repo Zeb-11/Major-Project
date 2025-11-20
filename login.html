@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+ <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NextStep - Find Your Dream Job</title>
@@ -28,8 +28,6 @@
       });
   }
 </script>
-
-        <button onclick="handleGoogleLogin()">Sign in with Google</button>
     <style>
         :root {
             --primary-blue: #2563eb;
@@ -272,7 +270,7 @@
                     
                     <!-- Signup Button  -->
                     <div class="form-group">
-                        <button type="submit" class="btn-primary" onclick="location.href ='home.html'">Sign In</button> 
+                        <button type="submit" class="btn-primary">Sign In</button> 
                     </div>
                 </form>
                 
@@ -367,6 +365,8 @@
 
 
     <script>
+        const API_BASE_URL = window.location.origin.includes('localhost:5000') ? '' : 'http://localhost:5000';
+
         function showSignupForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('signup-form').classList.remove('hidden');
@@ -393,7 +393,7 @@
             });
         }
         
-        // Form validation for login
+        // Form validation + backend call for login
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let isValid = true;
@@ -420,13 +420,35 @@
                 document.getElementById('login-password-error').textContent = '';
             }
             
-            // if (isValid) {
-            //     // Here you would typically send the data to your server
-            //     alert('Login successful! (This is a demo)');
-            // }
+            if (isValid) {
+                fetch(`${API_BASE_URL}/api/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email.value,
+                        password: password.value
+                    })
+                })
+                .then(response => response.json().then(data => ({ ok: response.ok, status: response.status, data })))
+                .then(({ ok, status, data }) => {
+                    if (ok) {
+                        alert('Login successful!');
+                        window.location.href = 'home.html';
+                    } else {
+                        const message = data && data.message ? data.message : 'Login failed.';
+                        alert(message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during login:', error);
+                    alert('Could not connect to server. Make sure backend is running.');
+                });
+            }
         });
         
-        // Form validation for signup
+        // Form validation + backend call for signup
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let isValid = true;
@@ -478,8 +500,31 @@
             }
             
             if (isValid) {
-                // Here you would typically send the data to your server
-                alert('Account created successfully! (This is a demo)');
+                fetch(`${API_BASE_URL}/api/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name.value,
+                        email: email.value,
+                        password: password.value
+                    })
+                })
+                .then(response => response.json().then(data => ({ ok: response.ok, status: response.status, data })))
+                .then(({ ok, status, data }) => {
+                    if (ok) {
+                        alert('Account created successfully! You can now log in.');
+                        showLoginForm();
+                    } else {
+                        const message = data && data.message ? data.message : 'Signup failed.';
+                        alert(message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during signup:', error);
+                    alert('Could not connect to server. Make sure backend is running.');
+                });
             }
          });
         

@@ -1,5 +1,14 @@
 {
+  "name": "nextstep-frontend-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
+    "express": "^4.21.1",
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3",
     "firebase": "^12.6.0"
   }
 }
